@@ -1,0 +1,16 @@
+# Runtime dependencies for the confidence pipeline
+# Install inside the existing .venv:
+#   .venv/bin/pip install -r requirements.txt
+#
+# NOTE: The .venv already contains all required packages.
+# This file is provided for documentation and reproducibility.
+
+numpy>=1.24
+pandas>=1.5
+scikit-learn>=1.2
+scipy>=1.10
+matplotlib>=3.6
+joblib>=1.2
+
+# Testing
+pytest>=7.0

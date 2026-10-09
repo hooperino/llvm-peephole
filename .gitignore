@@ -1,10 +1,42 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+.env
+
+# Build artifacts (LLVM / C++)
 build/
 *.o
 *.so
-.env
+
+# ── Large external submodules / builds / third-party tools ──
+# (Excluded from git tracking as they can be downloaded / built separately)
+souper/
+alive2/
+llvm-build/
+llvm-project/
+
+# ── ML pipeline: generated artifacts (not source code) ──
+# Raw / unprocessed data from external tools
 data/raw/
-models/
-results/
+
+# Trained model files
+models/*.joblib
+models/*.pkl
+
+# Generated results and plots
+results/*.csv
+results/*.json
+results/*.txt
+results/plots/
+
+# Synthetic dataset is COMMITTED (useful for CI / reproducibility demos)
+# If you prefer to exclude it: uncomment the next line
+# data/synthetic_candidates.csv
+
+# pytest cache
+.pytest_cache/
+*.egg-info/
+dist/

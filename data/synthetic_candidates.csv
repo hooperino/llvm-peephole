@@ -1,0 +1,801 @@
+candidate_id,src_repr,tgt_repr,src_instr_count,tgt_instr_count,instr_count_reduction,src_opcode_category,tgt_opcode_category,num_operands,num_constants,num_variables,has_constant_operand,instr_count_differs,candidate_complexity,label
+cand_0000,"%r = add i32 %a, 0",%p = %base,5,4,1,arithmetic,memory,2,2,0,1,1,3.3,0
+cand_0001,ret i32 0,%r = false,7,7,0,control,comparison,4,3,1,1,0,4.7,0
+cand_0002,"%r = add i32 %a, %b",%r = false,3,1,2,arithmetic,comparison,4,3,1,1,1,3.1,1
+cand_0003,%r = zext i1 %a to i32,%r = 0,2,1,1,conversion,bitwise,3,3,0,1,1,2.1,0
+cand_0004,%r = trunc i64 %a to i32,%r = 0,6,6,0,conversion,arithmetic,2,0,2,0,0,3.6,0
+cand_0005,"%r = select i1 true, i32 %a, i32 %b",%p = %base,2,2,0,other,memory,2,1,1,1,0,1.6,0
+cand_0006,%r = zext i1 %a to i32,%r = true,7,7,0,conversion,comparison,2,2,0,1,0,4.1,0
+cand_0007,"%r = add i32 %a, %b",%r = %a,6,3,3,arithmetic,bitwise,2,0,2,0,1,4.2,0
+cand_0008,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",7,6,1,memory,comparison,1,1,0,1,1,4.0,0
+cand_0009,%r = trunc i64 %a to i32,%p = %base,4,5,-1,conversion,memory,4,1,3,1,1,3.4,0
+cand_0010,"%r = icmp eq i32 %a, %a","%r = icmp ne i32 %a, 0",1,2,-1,comparison,comparison,1,1,0,1,1,1.0,0
+cand_0011,%r = zext i1 %a to i32,%r = 0,5,3,2,conversion,bitwise,4,2,2,1,1,4.1,1
+cand_0012,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",1,1,0,memory,arithmetic,3,2,1,1,0,1.4,0
+cand_0013,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",5,4,1,memory,comparison,3,0,3,0,1,3.6,1
+cand_0014,"%r = icmp slt i32 %a, %a",%r = 0,4,5,-1,comparison,bitwise,1,0,1,0,1,2.5,0
+cand_0015,%r = zext i1 %a to i32,%p = %base,1,2,-1,conversion,memory,2,2,0,1,1,1.3,0
+cand_0016,"%r = mul i32 %a, 1",%r = false,4,4,0,arithmetic,comparison,4,3,1,1,0,3.2,0
+cand_0017,"%r = icmp ne i32 %a, 0","%r = add i32 %a, %b",3,1,2,comparison,arithmetic,1,0,1,0,1,2.2,0
+cand_0018,%r = zext i1 %a to i32,"%r = add i32 %a, %b",7,6,1,conversion,arithmetic,4,0,4,0,1,4.9,0
+cand_0019,"%r = shl i32 %a, 0",%r = %a,2,1,1,bitwise,bitwise,3,2,1,1,1,2.1,0
+cand_0020,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",3,4,-1,comparison,arithmetic,2,2,0,1,1,2.3,0
+cand_0021,%r = trunc i64 %a to i32,%p = %base,2,3,-1,conversion,memory,2,2,0,1,1,1.8,0
+cand_0022,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",1,1,0,memory,arithmetic,4,0,4,0,0,1.7,0
+cand_0023,"%r = lshr i32 %a, 0",%p = %base,5,4,1,bitwise,memory,1,0,1,0,1,3.0,0
+cand_0024,"%p = getelementptr i32, i32* %base, i32 0",%r = false,5,4,1,memory,comparison,2,1,1,1,1,3.3,0
+cand_0025,"br i1 true, label %bb1, label %bb2",%r = 0,6,5,1,control,arithmetic,4,0,4,0,1,4.4,0
+cand_0026,ret i32 0,%r = %a,5,2,3,control,arithmetic,1,1,0,1,1,3.4,0
+cand_0027,"%r = select i1 true, i32 %a, i32 %b",%r = true,4,2,2,other,comparison,3,2,1,1,1,3.3,0
+cand_0028,"%r = icmp eq i32 %a, %a",%r = %a,4,4,0,comparison,bitwise,1,0,1,0,0,2.3,0
+cand_0029,"store i32 %v, i32* %p",%p = %base,2,2,0,memory,memory,3,1,2,1,0,1.9,0
+cand_0030,"%r = and i32 %a, %a",%r = false,4,5,-1,bitwise,comparison,2,0,2,0,1,2.8,0
+cand_0031,%r = zext i1 %a to i32,%r = false,1,1,0,conversion,comparison,3,1,2,1,0,1.4,0
+cand_0032,ret i32 0,%r = %a,5,5,0,control,arithmetic,3,3,0,1,0,3.4,0
+cand_0033,"%r = mul i32 %a, 1",%p = %base,2,1,1,arithmetic,memory,1,0,1,0,1,1.5,0
+cand_0034,"%r = icmp eq i32 %a, %a",%p = %base,4,5,-1,comparison,memory,4,1,3,1,1,3.4,0
+cand_0035,%r = call i32 @f(i32 %a),%r = true,4,5,-1,other,comparison,2,2,0,1,1,2.8,1
+cand_0036,"%r = lshr i32 %a, 0",%r = %a,4,5,-1,bitwise,bitwise,4,0,4,0,1,3.4,0
+cand_0037,%r = zext i1 %a to i32,%r = %a,7,4,3,conversion,arithmetic,3,1,2,1,1,5.0,0
+cand_0038,%r = trunc i64 %a to i32,%r = %a,3,4,-1,conversion,bitwise,1,1,0,1,1,2.0,0
+cand_0039,"%r = lshr i32 %a, 0",%p = %base,2,1,1,bitwise,memory,1,0,1,0,1,1.5,0
+cand_0040,%r = zext i1 %a to i32,%r = %a,3,3,0,conversion,arithmetic,3,3,0,1,0,2.4,0
+cand_0041,"%r = select i1 true, i32 %a, i32 %b",%p = %base,3,4,-1,other,memory,2,1,1,1,1,2.3,1
+cand_0042,"%r = shl i32 %a, 0","%r = add i32 %a, %b",2,1,1,bitwise,arithmetic,1,0,1,0,1,1.5,0
+cand_0043,"%r = add i32 %a, 0",%p = %base,5,5,0,arithmetic,memory,3,1,2,1,0,3.4,0
+cand_0044,"%r = mul i32 %a, 1",%r = true,1,2,-1,arithmetic,comparison,4,0,4,0,1,1.9,0
+cand_0045,"%r = mul i32 %a, 1",%r = 0,7,5,2,arithmetic,bitwise,1,0,1,0,1,4.2,0
+cand_0046,"store i32 %v, i32* %p",%r = 0,7,8,-1,memory,bitwise,2,0,2,0,1,4.3,0
+cand_0047,%r = zext i1 %a to i32,"%r = add i32 %a, %b",6,3,3,conversion,arithmetic,3,1,2,1,1,4.5,0
+cand_0048,"%r = shl i32 %a, 0",%p = %base,6,7,-1,bitwise,memory,2,1,1,1,1,3.8,1
+cand_0049,%r = trunc i64 %a to i32,%r = false,1,1,0,conversion,comparison,4,1,3,1,0,1.7,0
+cand_0050,"%r = shl i32 %a, 0",%p = %base,5,6,-1,bitwise,memory,4,3,1,1,1,3.9,0
+cand_0051,"%r = sub i32 %a, %a",%r = 0,7,6,1,arithmetic,bitwise,1,1,0,1,1,4.0,1
+cand_0052,"store i32 %v, i32* %p","%r = add i32 %a, %b",2,1,1,memory,arithmetic,4,3,1,1,1,2.4,1
+cand_0053,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",4,3,1,other,arithmetic,2,0,2,0,1,2.8,0
+cand_0054,"%r = select i1 true, i32 %a, i32 %b",%r = %a,7,8,-1,other,arithmetic,3,0,3,0,1,4.6,0
+cand_0055,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,4,1,3,memory,arithmetic,3,0,3,0,1,3.5,1
+cand_0056,"store i32 %v, i32* %p",%r = true,4,4,0,memory,comparison,4,1,3,1,0,3.2,0
+cand_0057,%r = zext i1 %a to i32,%p = %base,6,7,-1,conversion,memory,3,0,3,0,1,4.1,0
+cand_0058,"%r = xor i32 %a, 0",%r = %a,2,2,0,bitwise,arithmetic,3,3,0,1,0,1.9,0
+cand_0059,"%r = sub i32 %a, %a",%p = %base,4,5,-1,arithmetic,memory,1,0,1,0,1,2.5,1
+cand_0060,"%r = icmp ne i32 %a, 0",%p = %base,5,2,3,comparison,memory,4,4,0,1,1,4.3,1
+cand_0061,%r = call i32 @f(i32 %a),%r = 0,6,5,1,other,bitwise,4,3,1,1,1,4.4,1
+cand_0062,%r = trunc i64 %a to i32,%p = %base,4,2,2,conversion,memory,3,3,0,1,1,3.3,0
+cand_0063,%r = zext i1 %a to i32,%r = %a,5,5,0,conversion,bitwise,1,0,1,0,0,2.8,0
+cand_0064,"%r = xor i32 %a, 0",%r = %a,5,3,2,bitwise,bitwise,2,1,1,1,1,3.5,1
+cand_0065,"store i32 %v, i32* %p",%r = 0,2,3,-1,memory,bitwise,1,0,1,0,1,1.5,0
+cand_0066,%r = trunc i64 %a to i32,%r = 0,6,4,2,conversion,bitwise,2,1,1,1,1,4.0,0
+cand_0067,"%r = and i32 %a, %a",%p = %base,4,3,1,bitwise,memory,4,3,1,1,1,3.4,1
+cand_0068,"%r = icmp ne i32 %a, 0","%r = add i32 %a, %b",2,2,0,comparison,arithmetic,3,2,1,1,0,1.9,0
+cand_0069,"%r = add i32 %a, 0",%r = false,1,2,-1,arithmetic,comparison,3,2,1,1,1,1.6,1
+cand_0070,%r = call i32 @f(i32 %a),%p = %base,7,4,3,other,memory,4,2,2,1,1,5.3,0
+cand_0071,%r = call i32 @f(i32 %a),%p = %base,7,8,-1,other,memory,1,0,1,0,1,4.0,1
+cand_0072,ret i32 0,%r = true,5,2,3,control,comparison,1,0,1,0,1,3.4,0
+cand_0073,ret i32 0,%r = false,4,4,0,control,comparison,4,4,0,1,0,3.2,0
+cand_0074,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",7,8,-1,memory,arithmetic,1,1,0,1,1,4.0,0
+cand_0075,"%r = add i32 %a, %b","%r = icmp ne i32 %a, 0",3,4,-1,arithmetic,comparison,4,1,3,1,1,2.9,0
+cand_0076,"%r = icmp slt i32 %a, %a",%p = %base,6,6,0,comparison,memory,2,2,0,1,0,3.6,0
+cand_0077,"%r = icmp slt i32 %a, %a",%r = 0,7,4,3,comparison,arithmetic,1,1,0,1,1,4.4,1
+cand_0078,"%r = sub i32 %a, 0","%r = icmp ne i32 %a, 0",2,2,0,arithmetic,comparison,4,4,0,1,0,2.2,0
+cand_0079,"%r = sub i32 %a, %a",%r = 0,5,6,-1,arithmetic,bitwise,1,1,0,1,1,3.0,1
+cand_0080,"%r = xor i32 %a, 0",%p = %base,7,7,0,bitwise,memory,1,0,1,0,0,3.8,0
+cand_0081,ret i32 0,%r = false,1,1,0,control,comparison,2,2,0,1,0,1.1,0
+cand_0082,"%r = icmp ne i32 %a, 0",%r = 0,4,1,3,comparison,bitwise,2,1,1,1,1,3.2,0
+cand_0083,%r = zext i1 %a to i32,%r = 0,7,4,3,conversion,bitwise,4,3,1,1,1,5.3,1
+cand_0084,%r = trunc i64 %a to i32,%r = false,7,4,3,conversion,comparison,3,0,3,0,1,5.0,0
+cand_0085,"%r = add i32 %a, 0",%p = %base,1,1,0,arithmetic,memory,1,0,1,0,0,0.8,0
+cand_0086,%r = trunc i64 %a to i32,%r = %a,1,2,-1,conversion,arithmetic,2,1,1,1,1,1.3,1
+cand_0087,"%r = lshr i32 %a, 0",%r = %a,6,6,0,bitwise,arithmetic,4,4,0,1,0,4.2,0
+cand_0088,"%r = and i32 %a, %a","%r = add i32 %a, %b",5,6,-1,bitwise,arithmetic,4,4,0,1,1,3.9,0
+cand_0089,%r = zext i1 %a to i32,%p = %base,4,1,3,conversion,memory,2,0,2,0,1,3.2,0
+cand_0090,"%r = sub i32 %a, %a",%r = false,6,5,1,arithmetic,comparison,3,0,3,0,1,4.1,0
+cand_0091,"%r = shl i32 %a, 0",%r = 0,2,1,1,bitwise,arithmetic,2,0,2,0,1,1.8,0
+cand_0092,"%r = select i1 true, i32 %a, i32 %b",%r = true,1,1,0,other,comparison,3,0,3,0,0,1.4,0
+cand_0093,"%r = select i1 true, i32 %a, i32 %b",%r = %a,2,2,0,other,bitwise,1,1,0,1,0,1.3,0
+cand_0094,%r = call i32 @f(i32 %a),%r = false,6,4,2,other,comparison,3,3,0,1,1,4.3,0
+cand_0095,"%r = shl i32 %a, 0",%r = true,3,2,1,bitwise,comparison,3,2,1,1,1,2.6,1
+cand_0096,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",2,2,0,control,arithmetic,3,2,1,1,0,1.9,1
+cand_0097,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,1,2,-1,memory,memory,2,0,2,0,1,1.3,0
+cand_0098,%r = zext i1 %a to i32,%r = false,3,3,0,conversion,comparison,4,2,2,1,0,2.7,0
+cand_0099,"%r = select i1 true, i32 %a, i32 %b",%r = false,5,3,2,other,comparison,4,0,4,0,1,4.1,0
+cand_0100,"%r = xor i32 %a, 0","%r = add i32 %a, %b",1,2,-1,bitwise,arithmetic,2,1,1,1,1,1.3,0
+cand_0101,"br i1 true, label %bb1, label %bb2",%r = false,5,3,2,control,comparison,1,1,0,1,1,3.2,0
+cand_0102,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",4,2,2,memory,comparison,4,2,2,1,1,3.6,0
+cand_0103,"%r = sub i32 %a, 0",%p = %base,6,5,1,arithmetic,memory,3,2,1,1,1,4.1,1
+cand_0104,%r = zext i1 %a to i32,%r = true,6,4,2,conversion,comparison,2,0,2,0,1,4.0,0
+cand_0105,"%r = sub i32 %a, 0",%p = %base,1,1,0,arithmetic,memory,2,1,1,1,0,1.1,0
+cand_0106,%r = zext i1 %a to i32,%r = 0,1,2,-1,conversion,bitwise,4,0,4,0,1,1.9,0
+cand_0107,"%r = icmp ne i32 %a, 0",%r = %a,5,2,3,comparison,bitwise,1,1,0,1,1,3.4,1
+cand_0108,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,1,2,-1,memory,memory,2,2,0,1,1,1.3,0
+cand_0109,"%r = icmp slt i32 %a, %a",%r = 0,5,5,0,comparison,arithmetic,2,2,0,1,0,3.1,0
+cand_0110,"%r = add i32 %a, 0",%p = %base,4,3,1,arithmetic,memory,1,1,0,1,1,2.5,1
+cand_0111,%r = call i32 @f(i32 %a),%p = %base,7,6,1,other,memory,1,1,0,1,1,4.0,1
+cand_0112,"%r = select i1 true, i32 %a, i32 %b","%r = icmp ne i32 %a, 0",4,5,-1,other,comparison,2,0,2,0,1,2.8,0
+cand_0113,%r = zext i1 %a to i32,%r = %a,4,5,-1,conversion,bitwise,1,0,1,0,1,2.5,1
+cand_0114,"%r = select i1 true, i32 %a, i32 %b","%r = icmp ne i32 %a, 0",2,1,1,other,comparison,2,0,2,0,1,1.8,0
+cand_0115,ret i32 0,"%r = add i32 %a, %b",1,1,0,control,arithmetic,1,1,0,1,0,0.8,0
+cand_0116,"br i1 true, label %bb1, label %bb2",%r = 0,5,5,0,control,bitwise,4,3,1,1,0,3.7,0
+cand_0117,"%r = icmp slt i32 %a, %a",%p = %base,3,4,-1,comparison,memory,4,1,3,1,1,2.9,0
+cand_0118,"br i1 true, label %bb1, label %bb2",%p = %base,3,3,0,control,memory,2,2,0,1,0,2.1,0
+cand_0119,ret i32 0,%r = 0,3,3,0,control,bitwise,2,2,0,1,0,2.1,0
+cand_0120,"%r = add i32 %a, 0",%p = %base,7,7,0,arithmetic,memory,3,1,2,1,0,4.4,0
+cand_0121,"%r = icmp ne i32 %a, 0",%r = 0,2,1,1,comparison,arithmetic,3,3,0,1,1,2.1,1
+cand_0122,"%r = add i32 %a, 0","%r = icmp ne i32 %a, 0",4,1,3,arithmetic,comparison,2,0,2,0,1,3.2,0
+cand_0123,ret i32 0,%p = %base,6,6,0,control,memory,4,2,2,1,0,4.2,0
+cand_0124,%r = trunc i64 %a to i32,%r = false,6,4,2,conversion,comparison,4,3,1,1,1,4.6,1
+cand_0125,%r = call i32 @f(i32 %a),"%r = icmp ne i32 %a, 0",6,7,-1,other,comparison,2,1,1,1,1,3.8,0
+cand_0126,ret i32 0,"%r = add i32 %a, %b",7,4,3,control,arithmetic,2,2,0,1,1,4.7,0
+cand_0127,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",1,1,0,conversion,arithmetic,1,1,0,1,0,0.8,0
+cand_0128,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,4,2,2,memory,memory,4,1,3,1,1,3.6,0
+cand_0129,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",2,2,0,control,arithmetic,3,3,0,1,0,1.9,0
+cand_0130,"%r = or i32 %a, 0",%r = %a,1,1,0,bitwise,arithmetic,4,0,4,0,0,1.7,0
+cand_0131,%r = trunc i64 %a to i32,"%r = icmp ne i32 %a, 0",5,5,0,conversion,comparison,1,1,0,1,0,2.8,0
+cand_0132,"%r = icmp eq i32 %a, %a","%r = add i32 %a, %b",7,5,2,comparison,arithmetic,1,1,0,1,1,4.2,0
+cand_0133,%r = call i32 @f(i32 %a),%r = false,2,3,-1,other,comparison,3,0,3,0,1,2.1,0
+cand_0134,ret i32 0,%r = false,2,1,1,control,comparison,2,2,0,1,1,1.8,0
+cand_0135,"%r = select i1 true, i32 %a, i32 %b",%r = %a,5,4,1,other,bitwise,2,1,1,1,1,3.3,0
+cand_0136,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",5,2,3,other,arithmetic,3,1,2,1,1,4.0,0
+cand_0137,"store i32 %v, i32* %p",%p = %base,5,3,2,memory,memory,4,2,2,1,1,4.1,0
+cand_0138,"%r = mul i32 %a, 1",%r = %a,7,8,-1,arithmetic,arithmetic,3,2,1,1,1,4.6,0
+cand_0139,"%r = icmp slt i32 %a, %a",%r = %a,4,2,2,comparison,arithmetic,1,0,1,0,1,2.7,0
+cand_0140,"%r = add i32 %a, %b","%r = icmp ne i32 %a, 0",1,1,0,arithmetic,comparison,2,2,0,1,0,1.1,0
+cand_0141,"%r = icmp slt i32 %a, %a",%p = %base,7,8,-1,comparison,memory,4,2,2,1,1,4.9,0
+cand_0142,"%r = icmp ne i32 %a, 0",%p = %base,3,1,2,comparison,memory,3,1,2,1,1,2.8,1
+cand_0143,%r = call i32 @f(i32 %a),%p = %base,6,4,2,other,memory,3,2,1,1,1,4.3,0
+cand_0144,%r = zext i1 %a to i32,"%r = add i32 %a, %b",3,2,1,conversion,arithmetic,1,0,1,0,1,2.0,0
+cand_0145,"%r = add i32 %a, %b",%r = false,2,3,-1,arithmetic,comparison,3,3,0,1,1,2.1,0
+cand_0146,%r = call i32 @f(i32 %a),%p = %base,5,5,0,other,memory,2,2,0,1,0,3.1,0
+cand_0147,"%r = select i1 true, i32 %a, i32 %b",%r = %a,2,1,1,other,bitwise,3,1,2,1,1,2.1,0
+cand_0148,"br i1 true, label %bb1, label %bb2",%p = %base,4,5,-1,control,memory,2,0,2,0,1,2.8,0
+cand_0149,%r = trunc i64 %a to i32,%r = %a,3,1,2,conversion,arithmetic,1,0,1,0,1,2.2,0
+cand_0150,"%r = lshr i32 %a, 0",%r = true,6,4,2,bitwise,comparison,1,0,1,0,1,3.7,0
+cand_0151,%r = trunc i64 %a to i32,%r = %a,7,7,0,conversion,arithmetic,2,0,2,0,0,4.1,0
+cand_0152,"%r = xor i32 %a, 0",%r = 0,2,1,1,bitwise,bitwise,2,0,2,0,1,1.8,1
+cand_0153,"%r = mul i32 %a, 1",%r = false,2,2,0,arithmetic,comparison,1,0,1,0,0,1.3,0
+cand_0154,"store i32 %v, i32* %p",%p = %base,4,2,2,memory,memory,1,0,1,0,1,2.7,0
+cand_0155,"%r = or i32 %a, 0",%p = %base,5,3,2,bitwise,memory,1,1,0,1,1,3.2,1
+cand_0156,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,4,3,1,memory,arithmetic,4,3,1,1,1,3.4,1
+cand_0157,"%r = icmp ne i32 %a, 0",%r = %a,1,2,-1,comparison,arithmetic,1,0,1,0,1,1.0,1
+cand_0158,"%r = and i32 %a, %a",%r = 0,5,5,0,bitwise,arithmetic,2,0,2,0,0,3.1,0
+cand_0159,ret i32 0,%p = %base,4,1,3,control,memory,2,2,0,1,1,3.2,0
+cand_0160,"br i1 true, label %bb1, label %bb2",%p = %base,6,7,-1,control,memory,4,1,3,1,1,4.4,0
+cand_0161,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,7,7,0,memory,bitwise,4,4,0,1,0,4.7,0
+cand_0162,"%r = or i32 %a, 0",%r = %a,4,4,0,bitwise,bitwise,1,1,0,1,0,2.3,0
+cand_0163,ret i32 0,%r = %a,6,3,3,control,bitwise,4,0,4,0,1,4.8,1
+cand_0164,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",5,5,0,control,arithmetic,4,3,1,1,0,3.7,0
+cand_0165,"%r = add i32 %a, %b",%p = %base,2,2,0,arithmetic,memory,1,0,1,0,0,1.3,0
+cand_0166,"%r = lshr i32 %a, 0",%r = %a,2,3,-1,bitwise,arithmetic,3,0,3,0,1,2.1,1
+cand_0167,"%r = add i32 %a, 0",%r = false,7,6,1,arithmetic,comparison,3,1,2,1,1,4.6,1
+cand_0168,"%r = select i1 true, i32 %a, i32 %b",%r = 0,4,1,3,other,bitwise,3,0,3,0,1,3.5,0
+cand_0169,"%r = sub i32 %a, %a",%r = %a,3,2,1,arithmetic,arithmetic,3,3,0,1,1,2.6,1
+cand_0170,"%r = sub i32 %a, 0",%r = 0,2,3,-1,arithmetic,arithmetic,4,4,0,1,1,2.4,0
+cand_0171,ret i32 0,"%r = icmp ne i32 %a, 0",3,4,-1,control,comparison,3,2,1,1,1,2.6,0
+cand_0172,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",7,4,3,memory,comparison,2,2,0,1,1,4.7,0
+cand_0173,"%r = add i32 %a, 0",%r = 0,4,3,1,arithmetic,bitwise,2,2,0,1,1,2.8,1
+cand_0174,%r = call i32 @f(i32 %a),%r = %a,5,4,1,other,arithmetic,1,0,1,0,1,3.0,0
+cand_0175,"%r = or i32 %a, 0",%p = %base,7,8,-1,bitwise,memory,4,1,3,1,1,4.9,0
+cand_0176,"%r = select i1 true, i32 %a, i32 %b",%r = false,5,6,-1,other,comparison,3,1,2,1,1,3.6,0
+cand_0177,"br i1 true, label %bb1, label %bb2",%r = true,4,4,0,control,comparison,4,2,2,1,0,3.2,0
+cand_0178,"br i1 true, label %bb1, label %bb2",%p = %base,7,7,0,control,memory,3,0,3,0,0,4.4,0
+cand_0179,"%r = or i32 %a, 0",%r = 0,1,1,0,bitwise,bitwise,4,4,0,1,0,1.7,0
+cand_0180,%r = trunc i64 %a to i32,%r = false,3,3,0,conversion,comparison,2,1,1,1,0,2.1,0
+cand_0181,"br i1 true, label %bb1, label %bb2",%r = %a,5,4,1,control,arithmetic,4,2,2,1,1,3.9,0
+cand_0182,"%r = and i32 %a, %a",%r = %a,3,4,-1,bitwise,bitwise,1,0,1,0,1,2.0,0
+cand_0183,"br i1 true, label %bb1, label %bb2",%r = 0,7,7,0,control,arithmetic,1,0,1,0,0,3.8,0
+cand_0184,%r = zext i1 %a to i32,%r = %a,2,2,0,conversion,bitwise,1,1,0,1,0,1.3,0
+cand_0185,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,2,1,1,memory,bitwise,1,0,1,0,1,1.5,0
+cand_0186,"%r = select i1 true, i32 %a, i32 %b",%r = true,4,5,-1,other,comparison,1,0,1,0,1,2.5,0
+cand_0187,"%r = icmp ne i32 %a, 0",%r = 0,7,7,0,comparison,bitwise,4,0,4,0,0,4.7,0
+cand_0188,"%r = select i1 true, i32 %a, i32 %b",%r = true,1,1,0,other,comparison,1,1,0,1,0,0.8,1
+cand_0189,"store i32 %v, i32* %p",%p = %base,6,6,0,memory,memory,3,1,2,1,0,3.9,0
+cand_0190,"%r = sub i32 %a, 0",%r = 0,4,1,3,arithmetic,bitwise,1,1,0,1,1,2.9,1
+cand_0191,%r = zext i1 %a to i32,%r = 0,6,4,2,conversion,bitwise,4,2,2,1,1,4.6,0
+cand_0192,"%r = sub i32 %a, 0","%r = add i32 %a, %b",5,6,-1,arithmetic,arithmetic,2,0,2,0,1,3.3,1
+cand_0193,"%r = icmp slt i32 %a, %a",%r = %a,2,3,-1,comparison,bitwise,3,0,3,0,1,2.1,0
+cand_0194,"%r = xor i32 %a, 0","%r = add i32 %a, %b",7,7,0,bitwise,arithmetic,1,1,0,1,0,3.8,0
+cand_0195,"%p = getelementptr i32, i32* %base, i32 0",%r = true,6,4,2,memory,comparison,2,0,2,0,1,4.0,0
+cand_0196,"%r = sub i32 %a, 0",%p = %base,1,2,-1,arithmetic,memory,2,1,1,1,1,1.3,0
+cand_0197,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,4,5,-1,memory,bitwise,2,1,1,1,1,2.8,0
+cand_0198,"%r = add i32 %a, 0",%r = 0,4,5,-1,arithmetic,arithmetic,4,0,4,0,1,3.4,0
+cand_0199,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,2,3,-1,memory,arithmetic,1,0,1,0,1,1.5,0
+cand_0200,"%r = select i1 true, i32 %a, i32 %b",%p = %base,5,2,3,other,memory,2,2,0,1,1,3.7,0
+cand_0201,ret i32 0,"%r = add i32 %a, %b",6,7,-1,control,arithmetic,1,1,0,1,1,3.5,0
+cand_0202,%r = trunc i64 %a to i32,%r = %a,6,7,-1,conversion,arithmetic,3,1,2,1,1,4.1,0
+cand_0203,"%r = add i32 %a, %b",%p = %base,5,5,0,arithmetic,memory,1,1,0,1,0,2.8,0
+cand_0204,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",7,6,1,conversion,arithmetic,2,0,2,0,1,4.3,0
+cand_0205,"%r = mul i32 %a, 1",%r = 0,2,3,-1,arithmetic,bitwise,1,0,1,0,1,1.5,0
+cand_0206,"%r = sub i32 %a, %a",%p = %base,5,4,1,arithmetic,memory,2,0,2,0,1,3.3,0
+cand_0207,"%r = icmp slt i32 %a, %a",%r = false,6,5,1,comparison,comparison,2,1,1,1,1,3.8,1
+cand_0208,"br i1 true, label %bb1, label %bb2",%p = %base,4,2,2,control,memory,3,0,3,0,1,3.3,0
+cand_0209,ret i32 0,"%r = icmp ne i32 %a, 0",1,2,-1,control,comparison,2,0,2,0,1,1.3,0
+cand_0210,%r = zext i1 %a to i32,%r = %a,4,4,0,conversion,bitwise,3,0,3,0,0,2.9,0
+cand_0211,%r = call i32 @f(i32 %a),%r = true,6,4,2,other,comparison,2,2,0,1,1,4.0,0
+cand_0212,%r = trunc i64 %a to i32,%r = false,7,5,2,conversion,comparison,2,0,2,0,1,4.5,0
+cand_0213,"%r = icmp eq i32 %a, %a",%r = %a,4,2,2,comparison,bitwise,1,1,0,1,1,2.7,1
+cand_0214,"br i1 true, label %bb1, label %bb2","%r = icmp ne i32 %a, 0",5,3,2,control,comparison,1,1,0,1,1,3.2,0
+cand_0215,"%r = shl i32 %a, 0",%p = %base,7,7,0,bitwise,memory,1,1,0,1,0,3.8,1
+cand_0216,"%r = select i1 true, i32 %a, i32 %b",%r = 0,6,3,3,other,bitwise,2,0,2,0,1,4.2,0
+cand_0217,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",7,6,1,conversion,arithmetic,3,2,1,1,1,4.6,0
+cand_0218,%r = trunc i64 %a to i32,%r = 0,3,3,0,conversion,bitwise,1,0,1,0,0,1.8,0
+cand_0219,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",4,1,3,memory,comparison,3,1,2,1,1,3.5,0
+cand_0220,"%r = icmp eq i32 %a, %a",%r = %a,2,3,-1,comparison,bitwise,4,4,0,1,1,2.4,0
+cand_0221,ret i32 0,%r = %a,4,4,0,control,bitwise,4,1,3,1,0,3.2,0
+cand_0222,"%r = select i1 true, i32 %a, i32 %b",%p = %base,3,4,-1,other,memory,4,4,0,1,1,2.9,0
+cand_0223,%r = zext i1 %a to i32,"%r = add i32 %a, %b",6,3,3,conversion,arithmetic,2,1,1,1,1,4.2,0
+cand_0224,"%r = xor i32 %a, 0",%r = false,3,2,1,bitwise,comparison,2,1,1,1,1,2.3,1
+cand_0225,"%r = icmp eq i32 %a, %a",%r = false,6,4,2,comparison,comparison,4,2,2,1,1,4.6,1
+cand_0226,"%r = add i32 %a, 0",%r = 0,6,3,3,arithmetic,bitwise,4,1,3,1,1,4.8,0
+cand_0227,%r = zext i1 %a to i32,"%r = add i32 %a, %b",3,2,1,conversion,arithmetic,4,1,3,1,1,2.9,0
+cand_0228,"%r = lshr i32 %a, 0",%r = 0,5,6,-1,bitwise,bitwise,4,1,3,1,1,3.9,1
+cand_0229,"%r = sub i32 %a, %a",%r = true,6,4,2,arithmetic,comparison,2,1,1,1,1,4.0,0
+cand_0230,"br i1 true, label %bb1, label %bb2",%r = false,6,5,1,control,comparison,1,0,1,0,1,3.5,0
+cand_0231,"store i32 %v, i32* %p",%r = %a,5,5,0,memory,bitwise,3,0,3,0,0,3.4,0
+cand_0232,%r = call i32 @f(i32 %a),%r = %a,1,2,-1,other,arithmetic,3,0,3,0,1,1.6,0
+cand_0233,"%r = icmp ne i32 %a, 0","%r = add i32 %a, %b",3,1,2,comparison,arithmetic,1,0,1,0,1,2.2,0
+cand_0234,"%r = icmp slt i32 %a, %a",%r = false,6,7,-1,comparison,comparison,4,4,0,1,1,4.4,0
+cand_0235,"%r = icmp ne i32 %a, 0",%r = true,6,3,3,comparison,comparison,2,0,2,0,1,4.2,0
+cand_0236,"%r = xor i32 %a, 0",%p = %base,1,1,0,bitwise,memory,1,0,1,0,0,0.8,1
+cand_0237,"store i32 %v, i32* %p","%r = add i32 %a, %b",2,1,1,memory,arithmetic,1,0,1,0,1,1.5,1
+cand_0238,"%r = icmp eq i32 %a, %a",%r = true,6,7,-1,comparison,comparison,2,0,2,0,1,3.8,0
+cand_0239,"%r = and i32 %a, %a",%p = %base,4,3,1,bitwise,memory,2,2,0,1,1,2.8,1
+cand_0240,"%r = add i32 %a, %b",%r = true,6,5,1,arithmetic,comparison,2,0,2,0,1,3.8,0
+cand_0241,"%p = getelementptr i32, i32* %base, i32 0",%r = false,4,2,2,memory,comparison,2,1,1,1,1,3.0,0
+cand_0242,"%r = and i32 %a, %a",%p = %base,1,2,-1,bitwise,memory,1,0,1,0,1,1.0,0
+cand_0243,"%r = sub i32 %a, %a",%p = %base,1,1,0,arithmetic,memory,3,3,0,1,0,1.4,0
+cand_0244,"%r = sub i32 %a, %a","%r = add i32 %a, %b",4,5,-1,arithmetic,arithmetic,2,0,2,0,1,2.8,0
+cand_0245,%r = call i32 @f(i32 %a),%r = 0,2,2,0,other,bitwise,1,0,1,0,0,1.3,0
+cand_0246,"%r = icmp ne i32 %a, 0",%r = 0,4,4,0,comparison,arithmetic,3,1,2,1,0,2.9,1
+cand_0247,"br i1 true, label %bb1, label %bb2",%r = false,1,2,-1,control,comparison,3,1,2,1,1,1.6,0
+cand_0248,"%r = xor i32 %a, 0",%r = %a,6,3,3,bitwise,bitwise,4,1,3,1,1,4.8,1
+cand_0249,"%r = icmp slt i32 %a, %a",%r = 0,4,1,3,comparison,arithmetic,2,1,1,1,1,3.2,0
+cand_0250,ret i32 0,%r = 0,1,1,0,control,bitwise,1,1,0,1,0,0.8,0
+cand_0251,"br i1 true, label %bb1, label %bb2",%p = %base,7,4,3,control,memory,2,2,0,1,1,4.7,0
+cand_0252,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,1,2,memory,arithmetic,2,1,1,1,1,2.5,0
+cand_0253,"%r = add i32 %a, 0",%r = 0,7,4,3,arithmetic,arithmetic,2,0,2,0,1,4.7,0
+cand_0254,"%r = sub i32 %a, 0",%r = 0,5,6,-1,arithmetic,arithmetic,1,0,1,0,1,3.0,1
+cand_0255,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,2,1,memory,bitwise,4,3,1,1,1,2.9,0
+cand_0256,"%r = add i32 %a, 0",%p = %base,5,2,3,arithmetic,memory,4,0,4,0,1,4.3,0
+cand_0257,"%r = add i32 %a, %b",%r = %a,1,1,0,arithmetic,bitwise,4,4,0,1,0,1.7,0
+cand_0258,%r = zext i1 %a to i32,%r = %a,7,6,1,conversion,arithmetic,1,0,1,0,1,4.0,0
+cand_0259,"%r = icmp eq i32 %a, %a","%r = add i32 %a, %b",5,6,-1,comparison,arithmetic,4,4,0,1,1,3.9,0
+cand_0260,"%r = select i1 true, i32 %a, i32 %b","%r = icmp ne i32 %a, 0",4,2,2,other,comparison,4,4,0,1,1,3.6,0
+cand_0261,"%r = icmp eq i32 %a, %a",%r = 0,1,2,-1,comparison,bitwise,2,0,2,0,1,1.3,0
+cand_0262,"%r = mul i32 %a, 1",%r = 0,5,4,1,arithmetic,arithmetic,2,2,0,1,1,3.3,1
+cand_0263,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,7,8,-1,memory,bitwise,4,3,1,1,1,4.9,0
+cand_0264,"%r = icmp slt i32 %a, %a",%p = %base,4,2,2,comparison,memory,2,0,2,0,1,3.0,0
+cand_0265,"%r = icmp slt i32 %a, %a",%r = %a,7,5,2,comparison,bitwise,1,0,1,0,1,4.2,0
+cand_0266,"store i32 %v, i32* %p",%r = false,7,5,2,memory,comparison,4,1,3,1,1,5.1,0
+cand_0267,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,4,5,-1,memory,bitwise,4,4,0,1,1,3.4,0
+cand_0268,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",5,6,-1,other,arithmetic,4,1,3,1,1,3.9,0
+cand_0269,%r = call i32 @f(i32 %a),%r = 0,5,2,3,other,arithmetic,4,3,1,1,1,4.3,1
+cand_0270,"%r = icmp eq i32 %a, %a",%r = false,2,3,-1,comparison,comparison,1,0,1,0,1,1.5,1
+cand_0271,"store i32 %v, i32* %p",%p = %base,7,5,2,memory,memory,4,4,0,1,1,5.1,0
+cand_0272,"%r = icmp ne i32 %a, 0",%r = %a,2,3,-1,comparison,arithmetic,1,0,1,0,1,1.5,0
+cand_0273,"store i32 %v, i32* %p","%r = add i32 %a, %b",7,4,3,memory,arithmetic,4,3,1,1,1,5.3,0
+cand_0274,"%r = and i32 %a, %a",%p = %base,7,6,1,bitwise,memory,2,0,2,0,1,4.3,0
+cand_0275,"store i32 %v, i32* %p",%r = 0,2,2,0,memory,bitwise,3,3,0,1,0,1.9,0
+cand_0276,%r = call i32 @f(i32 %a),%r = 0,1,1,0,other,bitwise,1,0,1,0,0,0.8,0
+cand_0277,"%r = add i32 %a, 0",%r = %a,5,3,2,arithmetic,bitwise,3,3,0,1,1,3.8,1
+cand_0278,"store i32 %v, i32* %p",%r = 0,4,4,0,memory,bitwise,3,0,3,0,0,2.9,0
+cand_0279,%r = trunc i64 %a to i32,%r = false,1,1,0,conversion,comparison,3,1,2,1,0,1.4,0
+cand_0280,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,5,2,3,memory,arithmetic,2,1,1,1,1,3.7,0
+cand_0281,"%r = or i32 %a, 0",%r = %a,2,3,-1,bitwise,bitwise,2,2,0,1,1,1.8,0
+cand_0282,"%r = select i1 true, i32 %a, i32 %b",%p = %base,7,7,0,other,memory,2,1,1,1,0,4.1,1
+cand_0283,"store i32 %v, i32* %p",%r = 0,4,2,2,memory,arithmetic,4,2,2,1,1,3.6,0
+cand_0284,"%r = add i32 %a, 0",%r = true,3,3,0,arithmetic,comparison,4,1,3,1,0,2.7,0
+cand_0285,%r = call i32 @f(i32 %a),%p = %base,1,1,0,other,memory,1,0,1,0,0,0.8,0
+cand_0286,%r = trunc i64 %a to i32,%r = false,1,2,-1,conversion,comparison,4,2,2,1,1,1.9,0
+cand_0287,%r = call i32 @f(i32 %a),%r = %a,2,3,-1,other,arithmetic,2,0,2,0,1,1.8,0
+cand_0288,"%r = and i32 %a, %a",%p = %base,2,1,1,bitwise,memory,3,3,0,1,1,2.1,1
+cand_0289,ret i32 0,%r = 0,7,7,0,control,arithmetic,4,1,3,1,0,4.7,0
+cand_0290,"%r = sub i32 %a, %a",%r = %a,4,2,2,arithmetic,bitwise,3,3,0,1,1,3.3,1
+cand_0291,"%r = select i1 true, i32 %a, i32 %b",%p = %base,4,3,1,other,memory,2,2,0,1,1,2.8,0
+cand_0292,"%r = xor i32 %a, 0",%r = 0,1,1,0,bitwise,bitwise,3,0,3,0,0,1.4,0
+cand_0293,"%r = or i32 %a, 0",%p = %base,6,6,0,bitwise,memory,1,0,1,0,0,3.3,0
+cand_0294,"%r = xor i32 %a, 0",%r = 0,7,8,-1,bitwise,bitwise,1,0,1,0,1,4.0,0
+cand_0295,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",2,2,0,other,arithmetic,1,0,1,0,0,1.3,0
+cand_0296,"%r = mul i32 %a, 1",%r = 0,4,2,2,arithmetic,arithmetic,4,1,3,1,1,3.6,1
+cand_0297,ret i32 0,%r = false,6,7,-1,control,comparison,3,2,1,1,1,4.1,0
+cand_0298,"%r = select i1 true, i32 %a, i32 %b",%r = 0,1,1,0,other,arithmetic,1,0,1,0,0,0.8,0
+cand_0299,"%r = select i1 true, i32 %a, i32 %b",%r = 0,6,3,3,other,bitwise,3,1,2,1,1,4.5,0
+cand_0300,"%r = icmp eq i32 %a, %a","%r = add i32 %a, %b",5,2,3,comparison,arithmetic,2,2,0,1,1,3.7,1
+cand_0301,%r = zext i1 %a to i32,%r = false,7,7,0,conversion,comparison,1,1,0,1,0,3.8,0
+cand_0302,"store i32 %v, i32* %p",%r = %a,4,5,-1,memory,arithmetic,2,0,2,0,1,2.8,0
+cand_0303,"store i32 %v, i32* %p",%p = %base,3,4,-1,memory,memory,1,1,0,1,1,2.0,0
+cand_0304,%r = zext i1 %a to i32,%r = false,5,2,3,conversion,comparison,3,3,0,1,1,4.0,0
+cand_0305,"%r = shl i32 %a, 0",%r = 0,6,3,3,bitwise,bitwise,4,4,0,1,1,4.8,1
+cand_0306,%r = call i32 @f(i32 %a),%r = 0,4,4,0,other,bitwise,1,1,0,1,0,2.3,0
+cand_0307,"store i32 %v, i32* %p",%r = false,6,6,0,memory,comparison,4,4,0,1,0,4.2,0
+cand_0308,"br i1 true, label %bb1, label %bb2",%p = %base,3,3,0,control,memory,1,1,0,1,0,1.8,0
+cand_0309,"%p = getelementptr i32, i32* %base, i32 0",%r = false,6,4,2,memory,comparison,1,0,1,0,1,3.7,0
+cand_0310,"br i1 true, label %bb1, label %bb2",%r = %a,7,7,0,control,arithmetic,2,1,1,1,0,4.1,0
+cand_0311,%r = call i32 @f(i32 %a),%r = %a,2,2,0,other,bitwise,2,0,2,0,0,1.6,0
+cand_0312,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",5,6,-1,other,arithmetic,1,1,0,1,1,3.0,1
+cand_0313,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,2,1,1,memory,bitwise,2,1,1,1,1,1.8,0
+cand_0314,"store i32 %v, i32* %p",%r = 0,1,1,0,memory,arithmetic,2,0,2,0,0,1.1,0
+cand_0315,%r = zext i1 %a to i32,%r = 0,4,3,1,conversion,arithmetic,4,1,3,1,1,3.4,0
+cand_0316,"%r = icmp eq i32 %a, %a","%r = add i32 %a, %b",4,2,2,comparison,arithmetic,2,2,0,1,1,3.0,1
+cand_0317,%r = zext i1 %a to i32,"%r = add i32 %a, %b",2,2,0,conversion,arithmetic,1,0,1,0,0,1.3,0
+cand_0318,"%r = icmp ne i32 %a, 0",%p = %base,2,2,0,comparison,memory,4,0,4,0,0,2.2,0
+cand_0319,"br i1 true, label %bb1, label %bb2",%r = false,1,2,-1,control,comparison,3,3,0,1,1,1.6,0
+cand_0320,%r = trunc i64 %a to i32,%p = %base,4,4,0,conversion,memory,2,1,1,1,0,2.6,1
+cand_0321,"%r = mul i32 %a, 1",%r = false,4,3,1,arithmetic,comparison,2,1,1,1,1,2.8,1
+cand_0322,"%p = getelementptr i32, i32* %base, i32 0",%r = true,6,7,-1,memory,comparison,1,1,0,1,1,3.5,0
+cand_0323,%r = trunc i64 %a to i32,%p = %base,7,7,0,conversion,memory,4,0,4,0,0,4.7,0
+cand_0324,"%r = add i32 %a, %b",%r = 0,6,4,2,arithmetic,bitwise,4,3,1,1,1,4.6,1
+cand_0325,"%r = select i1 true, i32 %a, i32 %b",%r = true,5,3,2,other,comparison,1,0,1,0,1,3.2,1
+cand_0326,"br i1 true, label %bb1, label %bb2",%p = %base,6,5,1,control,memory,1,1,0,1,1,3.5,0
+cand_0327,"br i1 true, label %bb1, label %bb2","%r = icmp ne i32 %a, 0",2,1,1,control,comparison,4,4,0,1,1,2.4,1
+cand_0328,"%r = select i1 true, i32 %a, i32 %b",%r = 0,5,6,-1,other,bitwise,4,2,2,1,1,3.9,0
+cand_0329,"%r = xor i32 %a, 0","%r = icmp ne i32 %a, 0",2,1,1,bitwise,comparison,2,2,0,1,1,1.8,1
+cand_0330,"%r = lshr i32 %a, 0","%r = icmp ne i32 %a, 0",6,5,1,bitwise,comparison,2,2,0,1,1,3.8,0
+cand_0331,"%r = and i32 %a, %a",%r = true,4,2,2,bitwise,comparison,4,4,0,1,1,3.6,1
+cand_0332,"%r = or i32 %a, 0",%r = false,6,6,0,bitwise,comparison,1,0,1,0,0,3.3,0
+cand_0333,%r = zext i1 %a to i32,%r = 0,2,1,1,conversion,arithmetic,1,1,0,1,1,1.5,0
+cand_0334,"store i32 %v, i32* %p",%r = true,5,5,0,memory,comparison,3,0,3,0,0,3.4,0
+cand_0335,"%r = icmp ne i32 %a, 0",%r = %a,7,4,3,comparison,arithmetic,1,1,0,1,1,4.4,0
+cand_0336,%r = zext i1 %a to i32,%r = %a,4,1,3,conversion,bitwise,1,0,1,0,1,2.9,0
+cand_0337,"store i32 %v, i32* %p",%r = 0,6,4,2,memory,arithmetic,4,2,2,1,1,4.6,0
+cand_0338,"%r = lshr i32 %a, 0",%r = 0,2,1,1,bitwise,arithmetic,1,0,1,0,1,1.5,0
+cand_0339,"%r = icmp eq i32 %a, %a",%r = %a,6,6,0,comparison,bitwise,2,0,2,0,0,3.6,0
+cand_0340,"%r = lshr i32 %a, 0",%r = 0,6,3,3,bitwise,bitwise,1,0,1,0,1,3.9,0
+cand_0341,%r = trunc i64 %a to i32,%r = 0,2,2,0,conversion,arithmetic,1,1,0,1,0,1.3,0
+cand_0342,"%r = icmp ne i32 %a, 0",%r = true,6,6,0,comparison,comparison,1,0,1,0,0,3.3,0
+cand_0343,%r = call i32 @f(i32 %a),%p = %base,4,1,3,other,memory,4,0,4,0,1,3.8,0
+cand_0344,"%r = mul i32 %a, 1",%p = %base,2,3,-1,arithmetic,memory,3,1,2,1,1,2.1,0
+cand_0345,"%r = mul i32 %a, 1",%r = 0,4,4,0,arithmetic,bitwise,3,2,1,1,0,2.9,0
+cand_0346,"%r = icmp ne i32 %a, 0",%p = %base,7,7,0,comparison,memory,1,1,0,1,0,3.8,0
+cand_0347,"%r = xor i32 %a, 0","%r = icmp ne i32 %a, 0",6,3,3,bitwise,comparison,2,2,0,1,1,4.2,1
+cand_0348,%r = zext i1 %a to i32,%p = %base,2,3,-1,conversion,memory,2,1,1,1,1,1.8,0
+cand_0349,"br i1 true, label %bb1, label %bb2",%r = 0,7,5,2,control,arithmetic,1,1,0,1,1,4.2,0
+cand_0350,%r = call i32 @f(i32 %a),%r = false,6,6,0,other,comparison,2,1,1,1,0,3.6,0
+cand_0351,%r = call i32 @f(i32 %a),%r = %a,6,4,2,other,arithmetic,2,0,2,0,1,4.0,0
+cand_0352,ret i32 0,%p = %base,1,1,0,control,memory,1,1,0,1,0,0.8,0
+cand_0353,ret i32 0,%r = 0,4,1,3,control,bitwise,2,1,1,1,1,3.2,1
+cand_0354,%r = zext i1 %a to i32,%r = 0,3,4,-1,conversion,bitwise,4,0,4,0,1,2.9,0
+cand_0355,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,2,3,-1,memory,memory,3,3,0,1,1,2.1,0
+cand_0356,"%r = or i32 %a, 0",%r = %a,6,6,0,bitwise,bitwise,1,1,0,1,0,3.3,0
+cand_0357,"%r = add i32 %a, %b",%r = 0,5,2,3,arithmetic,bitwise,3,1,2,1,1,4.0,1
+cand_0358,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,4,1,3,memory,arithmetic,3,1,2,1,1,3.5,0
+cand_0359,"%r = select i1 true, i32 %a, i32 %b",%r = %a,3,4,-1,other,arithmetic,3,0,3,0,1,2.6,0
+cand_0360,"%r = select i1 true, i32 %a, i32 %b",%r = true,7,8,-1,other,comparison,2,2,0,1,1,4.3,1
+cand_0361,"%r = lshr i32 %a, 0",%r = %a,1,1,0,bitwise,arithmetic,1,0,1,0,0,0.8,1
+cand_0362,"%r = add i32 %a, %b",%r = true,6,6,0,arithmetic,comparison,3,0,3,0,0,3.9,0
+cand_0363,ret i32 0,%r = %a,5,4,1,control,bitwise,3,3,0,1,1,3.6,0
+cand_0364,"store i32 %v, i32* %p","%r = add i32 %a, %b",4,1,3,memory,arithmetic,1,0,1,0,1,2.9,0
+cand_0365,"%r = or i32 %a, 0",%p = %base,2,3,-1,bitwise,memory,4,3,1,1,1,2.4,0
+cand_0366,"br i1 true, label %bb1, label %bb2",%p = %base,7,4,3,control,memory,4,3,1,1,1,5.3,0
+cand_0367,"%r = icmp eq i32 %a, %a",%r = 0,5,5,0,comparison,bitwise,4,0,4,0,0,3.7,0
+cand_0368,"store i32 %v, i32* %p",%r = %a,4,2,2,memory,bitwise,3,1,2,1,1,3.3,1
+cand_0369,ret i32 0,%r = 0,5,5,0,control,bitwise,3,2,1,1,0,3.4,0
+cand_0370,"%r = sub i32 %a, 0",%r = %a,3,2,1,arithmetic,arithmetic,1,1,0,1,1,2.0,1
+cand_0371,"store i32 %v, i32* %p",%p = %base,2,3,-1,memory,memory,4,2,2,1,1,2.4,0
+cand_0372,%r = call i32 @f(i32 %a),%r = 0,4,3,1,other,bitwise,1,1,0,1,1,2.5,0
+cand_0373,"%r = select i1 true, i32 %a, i32 %b",%r = true,5,5,0,other,comparison,4,3,1,1,0,3.7,0
+cand_0374,ret i32 0,%r = %a,4,5,-1,control,bitwise,2,1,1,1,1,2.8,0
+cand_0375,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,5,2,3,memory,bitwise,2,0,2,0,1,3.7,1
+cand_0376,ret i32 0,%r = %a,3,4,-1,control,bitwise,3,2,1,1,1,2.6,0
+cand_0377,"%r = select i1 true, i32 %a, i32 %b",%r = 0,1,2,-1,other,arithmetic,4,0,4,0,1,1.9,0
+cand_0378,"%r = icmp eq i32 %a, %a",%r = true,3,2,1,comparison,comparison,2,2,0,1,1,2.3,1
+cand_0379,"%r = select i1 true, i32 %a, i32 %b","%r = icmp ne i32 %a, 0",2,3,-1,other,comparison,2,2,0,1,1,1.8,0
+cand_0380,%r = trunc i64 %a to i32,%r = 0,3,2,1,conversion,bitwise,3,1,2,1,1,2.6,0
+cand_0381,"%r = add i32 %a, %b",%p = %base,1,2,-1,arithmetic,memory,2,1,1,1,1,1.3,0
+cand_0382,%r = call i32 @f(i32 %a),%r = %a,2,2,0,other,bitwise,3,2,1,1,0,1.9,0
+cand_0383,"%r = icmp ne i32 %a, 0",%r = 0,7,6,1,comparison,arithmetic,4,4,0,1,1,4.9,1
+cand_0384,%r = trunc i64 %a to i32,%r = %a,3,3,0,conversion,arithmetic,3,0,3,0,0,2.4,0
+cand_0385,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,3,0,memory,bitwise,3,3,0,1,0,2.4,1
+cand_0386,"%r = icmp slt i32 %a, %a",%r = %a,2,2,0,comparison,bitwise,4,4,0,1,0,2.2,0
+cand_0387,"%r = or i32 %a, 0",%p = %base,4,1,3,bitwise,memory,1,1,0,1,1,2.9,1
+cand_0388,"%r = and i32 %a, %a",%r = true,7,5,2,bitwise,comparison,3,0,3,0,1,4.8,0
+cand_0389,%r = trunc i64 %a to i32,%r = 0,1,2,-1,conversion,arithmetic,1,0,1,0,1,1.0,0
+cand_0390,ret i32 0,%r = 0,3,1,2,control,bitwise,2,2,0,1,1,2.5,1
+cand_0391,"store i32 %v, i32* %p",%r = %a,5,6,-1,memory,arithmetic,2,1,1,1,1,3.3,0
+cand_0392,%r = trunc i64 %a to i32,"%r = icmp ne i32 %a, 0",1,2,-1,conversion,comparison,1,1,0,1,1,1.0,0
+cand_0393,"store i32 %v, i32* %p",%r = %a,7,6,1,memory,bitwise,4,1,3,1,1,4.9,1
+cand_0394,"%r = sub i32 %a, 0",%r = %a,4,4,0,arithmetic,bitwise,2,0,2,0,0,2.6,0
+cand_0395,"%r = or i32 %a, 0","%r = icmp ne i32 %a, 0",5,5,0,bitwise,comparison,3,3,0,1,0,3.4,1
+cand_0396,"%r = select i1 true, i32 %a, i32 %b",%r = %a,5,5,0,other,bitwise,3,0,3,0,0,3.4,0
+cand_0397,"br i1 true, label %bb1, label %bb2",%r = 0,2,2,0,control,bitwise,1,0,1,0,0,1.3,0
+cand_0398,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",5,6,-1,memory,arithmetic,3,0,3,0,1,3.6,0
+cand_0399,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",7,7,0,memory,arithmetic,3,3,0,1,0,4.4,0
+cand_0400,"%r = and i32 %a, %a",%r = false,6,3,3,bitwise,comparison,1,1,0,1,1,3.9,1
+cand_0401,"store i32 %v, i32* %p",%r = 0,5,4,1,memory,bitwise,3,0,3,0,1,3.6,1
+cand_0402,ret i32 0,%r = false,2,3,-1,control,comparison,3,1,2,1,1,2.1,0
+cand_0403,%r = call i32 @f(i32 %a),%p = %base,1,2,-1,other,memory,1,0,1,0,1,1.0,0
+cand_0404,"%r = shl i32 %a, 0",%r = true,4,3,1,bitwise,comparison,4,2,2,1,1,3.4,1
+cand_0405,"%r = or i32 %a, 0",%r = false,3,1,2,bitwise,comparison,4,3,1,1,1,3.1,1
+cand_0406,ret i32 0,%r = 0,2,1,1,control,arithmetic,3,2,1,1,1,2.1,1
+cand_0407,"%r = and i32 %a, %a",%r = false,5,6,-1,bitwise,comparison,2,0,2,0,1,3.3,0
+cand_0408,"store i32 %v, i32* %p","%r = add i32 %a, %b",2,2,0,memory,arithmetic,2,0,2,0,0,1.6,0
+cand_0409,"store i32 %v, i32* %p",%r = %a,4,5,-1,memory,arithmetic,4,1,3,1,1,3.4,0
+cand_0410,"%r = add i32 %a, 0",%r = true,4,2,2,arithmetic,comparison,1,0,1,0,1,2.7,1
+cand_0411,"br i1 true, label %bb1, label %bb2","%r = icmp ne i32 %a, 0",3,2,1,control,comparison,1,0,1,0,1,2.0,0
+cand_0412,"%r = icmp slt i32 %a, %a",%r = %a,2,2,0,comparison,bitwise,1,1,0,1,0,1.3,0
+cand_0413,"%r = icmp eq i32 %a, %a",%p = %base,1,1,0,comparison,memory,1,0,1,0,0,0.8,0
+cand_0414,"%r = icmp ne i32 %a, 0",%r = 0,6,7,-1,comparison,bitwise,1,0,1,0,1,3.5,0
+cand_0415,"%r = lshr i32 %a, 0",%r = 0,5,4,1,bitwise,arithmetic,4,1,3,1,1,3.9,0
+cand_0416,"%r = sub i32 %a, %a",%p = %base,6,7,-1,arithmetic,memory,2,0,2,0,1,3.8,0
+cand_0417,ret i32 0,%p = %base,2,3,-1,control,memory,4,2,2,1,1,2.4,0
+cand_0418,%r = call i32 @f(i32 %a),%p = %base,6,3,3,other,memory,2,1,1,1,1,4.2,1
+cand_0419,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,3,1,2,memory,memory,4,0,4,0,1,3.1,0
+cand_0420,"%r = add i32 %a, 0",%p = %base,4,2,2,arithmetic,memory,1,0,1,0,1,2.7,0
+cand_0421,%r = call i32 @f(i32 %a),"%r = add i32 %a, %b",1,1,0,other,arithmetic,1,1,0,1,0,0.8,0
+cand_0422,"%r = lshr i32 %a, 0","%r = add i32 %a, %b",1,2,-1,bitwise,arithmetic,2,0,2,0,1,1.3,0
+cand_0423,"store i32 %v, i32* %p",%p = %base,2,3,-1,memory,memory,3,2,1,1,1,2.1,0
+cand_0424,"%r = sub i32 %a, 0",%r = 0,3,4,-1,arithmetic,bitwise,4,1,3,1,1,2.9,0
+cand_0425,"%r = xor i32 %a, 0",%r = 0,5,3,2,bitwise,arithmetic,1,0,1,0,1,3.2,0
+cand_0426,%r = zext i1 %a to i32,%r = true,4,1,3,conversion,comparison,3,2,1,1,1,3.5,0
+cand_0427,"%r = icmp slt i32 %a, %a",%r = %a,3,3,0,comparison,bitwise,2,1,1,1,0,2.1,0
+cand_0428,"%r = mul i32 %a, 1",%r = false,2,1,1,arithmetic,comparison,1,1,0,1,1,1.5,0
+cand_0429,"store i32 %v, i32* %p",%r = 0,4,1,3,memory,bitwise,4,1,3,1,1,3.8,1
+cand_0430,"%r = icmp eq i32 %a, %a",%p = %base,7,8,-1,comparison,memory,1,1,0,1,1,4.0,0
+cand_0431,"br i1 true, label %bb1, label %bb2",%r = true,7,6,1,control,comparison,2,1,1,1,1,4.3,0
+cand_0432,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,2,2,0,memory,memory,3,1,2,1,0,1.9,0
+cand_0433,ret i32 0,%r = %a,2,1,1,control,bitwise,4,0,4,0,1,2.4,0
+cand_0434,%r = trunc i64 %a to i32,%r = 0,3,2,1,conversion,arithmetic,2,0,2,0,1,2.3,0
+cand_0435,%r = call i32 @f(i32 %a),%r = %a,3,2,1,other,bitwise,2,0,2,0,1,2.3,0
+cand_0436,"%r = icmp eq i32 %a, %a",%p = %base,5,6,-1,comparison,memory,2,2,0,1,1,3.3,0
+cand_0437,"store i32 %v, i32* %p",%p = %base,3,1,2,memory,memory,4,0,4,0,1,3.1,0
+cand_0438,"store i32 %v, i32* %p",%p = %base,2,2,0,memory,memory,1,1,0,1,0,1.3,0
+cand_0439,%r = trunc i64 %a to i32,%r = 0,7,6,1,conversion,arithmetic,1,1,0,1,1,4.0,1
+cand_0440,%r = trunc i64 %a to i32,%r = 0,5,2,3,conversion,bitwise,1,1,0,1,1,3.4,0
+cand_0441,%r = zext i1 %a to i32,"%r = icmp ne i32 %a, 0",6,4,2,conversion,comparison,1,1,0,1,1,3.7,1
+cand_0442,"%r = icmp slt i32 %a, %a","%r = icmp ne i32 %a, 0",4,3,1,comparison,comparison,2,2,0,1,1,2.8,1
+cand_0443,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",2,3,-1,comparison,arithmetic,4,4,0,1,1,2.4,0
+cand_0444,"%r = icmp slt i32 %a, %a",%r = %a,3,2,1,comparison,arithmetic,2,1,1,1,1,2.3,1
+cand_0445,"%r = lshr i32 %a, 0","%r = icmp ne i32 %a, 0",4,3,1,bitwise,comparison,2,1,1,1,1,2.8,1
+cand_0446,"%r = lshr i32 %a, 0",%r = %a,6,5,1,bitwise,arithmetic,4,2,2,1,1,4.4,1
+cand_0447,"%r = mul i32 %a, 1",%r = true,2,1,1,arithmetic,comparison,4,1,3,1,1,2.4,1
+cand_0448,"%r = shl i32 %a, 0",%p = %base,1,1,0,bitwise,memory,3,1,2,1,0,1.4,1
+cand_0449,"%r = icmp slt i32 %a, %a",%r = false,2,3,-1,comparison,comparison,1,0,1,0,1,1.5,0
+cand_0450,"%r = sub i32 %a, 0","%r = icmp ne i32 %a, 0",3,1,2,arithmetic,comparison,2,2,0,1,1,2.5,1
+cand_0451,"%r = xor i32 %a, 0",%r = %a,1,2,-1,bitwise,bitwise,2,2,0,1,1,1.3,0
+cand_0452,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",6,7,-1,control,arithmetic,4,2,2,1,1,4.4,0
+cand_0453,%r = trunc i64 %a to i32,%p = %base,7,4,3,conversion,memory,4,0,4,0,1,5.3,0
+cand_0454,"%r = select i1 true, i32 %a, i32 %b",%r = 0,3,2,1,other,bitwise,2,2,0,1,1,2.3,0
+cand_0455,"%r = icmp ne i32 %a, 0",%r = false,7,8,-1,comparison,comparison,2,1,1,1,1,4.3,1
+cand_0456,"%r = add i32 %a, %b",%r = 0,5,2,3,arithmetic,arithmetic,2,1,1,1,1,3.7,1
+cand_0457,"%r = add i32 %a, 0",%p = %base,6,5,1,arithmetic,memory,4,2,2,1,1,4.4,1
+cand_0458,%r = call i32 @f(i32 %a),%r = %a,7,6,1,other,bitwise,2,0,2,0,1,4.3,0
+cand_0459,"store i32 %v, i32* %p",%r = %a,5,3,2,memory,bitwise,1,0,1,0,1,3.2,0
+cand_0460,"%r = icmp ne i32 %a, 0",%r = 0,2,2,0,comparison,bitwise,3,2,1,1,0,1.9,0
+cand_0461,"%r = icmp eq i32 %a, %a","%r = icmp ne i32 %a, 0",2,3,-1,comparison,comparison,2,1,1,1,1,1.8,0
+cand_0462,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",5,4,1,comparison,arithmetic,4,3,1,1,1,3.9,1
+cand_0463,"%r = add i32 %a, %b","%r = add i32 %a, %b",4,3,1,arithmetic,arithmetic,1,0,1,0,1,2.5,0
+cand_0464,"%r = sub i32 %a, %a",%r = false,6,7,-1,arithmetic,comparison,3,2,1,1,1,4.1,0
+cand_0465,"br i1 true, label %bb1, label %bb2",%p = %base,4,5,-1,control,memory,1,0,1,0,1,2.5,0
+cand_0466,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,7,7,0,memory,arithmetic,3,1,2,1,0,4.4,0
+cand_0467,"%r = and i32 %a, %a",%r = false,5,3,2,bitwise,comparison,1,1,0,1,1,3.2,1
+cand_0468,%r = call i32 @f(i32 %a),%r = %a,2,1,1,other,arithmetic,2,0,2,0,1,1.8,0
+cand_0469,"br i1 true, label %bb1, label %bb2",%r = %a,3,3,0,control,arithmetic,2,2,0,1,0,2.1,1
+cand_0470,%r = trunc i64 %a to i32,%p = %base,1,2,-1,conversion,memory,3,3,0,1,1,1.6,0
+cand_0471,"%r = and i32 %a, %a",%r = %a,2,2,0,bitwise,bitwise,4,2,2,1,0,2.2,0
+cand_0472,"store i32 %v, i32* %p",%r = 0,3,3,0,memory,bitwise,3,3,0,1,0,2.4,1
+cand_0473,"%r = icmp eq i32 %a, %a",%r = %a,1,1,0,comparison,bitwise,4,1,3,1,0,1.7,0
+cand_0474,"%r = sub i32 %a, %a",%p = %base,6,5,1,arithmetic,memory,3,3,0,1,1,4.1,0
+cand_0475,"%r = sub i32 %a, 0",%r = 0,3,3,0,arithmetic,arithmetic,1,0,1,0,0,1.8,0
+cand_0476,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",2,1,1,other,arithmetic,3,1,2,1,1,2.1,0
+cand_0477,"br i1 true, label %bb1, label %bb2",%r = %a,6,4,2,control,bitwise,1,1,0,1,1,3.7,0
+cand_0478,"br i1 true, label %bb1, label %bb2",%p = %base,3,3,0,control,memory,3,2,1,1,0,2.4,0
+cand_0479,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",4,4,0,control,arithmetic,4,1,3,1,0,3.2,1
+cand_0480,"%r = select i1 true, i32 %a, i32 %b",%p = %base,5,6,-1,other,memory,1,0,1,0,1,3.0,1
+cand_0481,"%r = mul i32 %a, 1","%r = icmp ne i32 %a, 0",6,6,0,arithmetic,comparison,1,0,1,0,0,3.3,0
+cand_0482,"%r = icmp ne i32 %a, 0",%p = %base,4,1,3,comparison,memory,3,3,0,1,1,3.5,1
+cand_0483,"br i1 true, label %bb1, label %bb2",%p = %base,7,4,3,control,memory,2,1,1,1,1,4.7,0
+cand_0484,"%r = select i1 true, i32 %a, i32 %b",%p = %base,5,5,0,other,memory,2,2,0,1,0,3.1,0
+cand_0485,"%r = icmp ne i32 %a, 0",%r = true,2,2,0,comparison,comparison,2,0,2,0,0,1.6,0
+cand_0486,"%r = select i1 true, i32 %a, i32 %b",%r = 0,1,1,0,other,bitwise,4,4,0,1,0,1.7,1
+cand_0487,"%p = getelementptr i32, i32* %base, i32 0",%r = true,7,8,-1,memory,comparison,1,0,1,0,1,4.0,1
+cand_0488,"%r = sub i32 %a, 0",%r = %a,3,4,-1,arithmetic,arithmetic,1,1,0,1,1,2.0,0
+cand_0489,"%r = sub i32 %a, %a",%r = 0,6,5,1,arithmetic,arithmetic,2,2,0,1,1,3.8,0
+cand_0490,"%r = icmp slt i32 %a, %a",%r = true,2,3,-1,comparison,comparison,4,1,3,1,1,2.4,1
+cand_0491,"%r = icmp ne i32 %a, 0","%r = icmp ne i32 %a, 0",5,4,1,comparison,comparison,1,1,0,1,1,3.0,1
+cand_0492,"%r = icmp ne i32 %a, 0",%p = %base,2,1,1,comparison,memory,3,2,1,1,1,2.1,1
+cand_0493,"%r = icmp ne i32 %a, 0",%r = false,7,6,1,comparison,comparison,3,3,0,1,1,4.6,1
+cand_0494,"%r = icmp eq i32 %a, %a",%p = %base,4,2,2,comparison,memory,1,0,1,0,1,2.7,0
+cand_0495,"%r = add i32 %a, 0",%r = %a,6,7,-1,arithmetic,arithmetic,4,0,4,0,1,4.4,0
+cand_0496,%r = zext i1 %a to i32,%r = %a,2,3,-1,conversion,arithmetic,4,3,1,1,1,2.4,0
+cand_0497,%r = trunc i64 %a to i32,"%r = icmp ne i32 %a, 0",2,3,-1,conversion,comparison,1,1,0,1,1,1.5,0
+cand_0498,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,7,7,0,memory,bitwise,1,1,0,1,0,3.8,0
+cand_0499,"%r = icmp slt i32 %a, %a",%r = %a,5,5,0,comparison,bitwise,2,2,0,1,0,3.1,0
+cand_0500,"br i1 true, label %bb1, label %bb2",%r = true,3,2,1,control,comparison,4,2,2,1,1,2.9,0
+cand_0501,%r = trunc i64 %a to i32,"%r = icmp ne i32 %a, 0",6,5,1,conversion,comparison,2,1,1,1,1,3.8,0
+cand_0502,"%r = and i32 %a, %a",%p = %base,6,6,0,bitwise,memory,4,2,2,1,0,4.2,1
+cand_0503,ret i32 0,%r = 0,2,3,-1,control,arithmetic,3,3,0,1,1,2.1,1
+cand_0504,ret i32 0,%r = 0,5,2,3,control,bitwise,1,0,1,0,1,3.4,0
+cand_0505,%r = zext i1 %a to i32,%p = %base,5,3,2,conversion,memory,2,2,0,1,1,3.5,0
+cand_0506,"%r = sub i32 %a, 0",%r = true,3,3,0,arithmetic,comparison,2,1,1,1,0,2.1,1
+cand_0507,"%r = icmp slt i32 %a, %a",%r = 0,2,2,0,comparison,arithmetic,4,4,0,1,0,2.2,0
+cand_0508,%r = call i32 @f(i32 %a),%r = 0,2,2,0,other,arithmetic,1,1,0,1,0,1.3,0
+cand_0509,%r = trunc i64 %a to i32,%p = %base,5,2,3,conversion,memory,4,3,1,1,1,4.3,0
+cand_0510,%r = call i32 @f(i32 %a),%r = 0,1,2,-1,other,arithmetic,4,4,0,1,1,1.9,0
+cand_0511,"%p = getelementptr i32, i32* %base, i32 0",%r = true,2,3,-1,memory,comparison,4,3,1,1,1,2.4,0
+cand_0512,"%r = sub i32 %a, 0",%p = %base,7,6,1,arithmetic,memory,4,3,1,1,1,4.9,0
+cand_0513,ret i32 0,%p = %base,5,6,-1,control,memory,1,1,0,1,1,3.0,0
+cand_0514,"br i1 true, label %bb1, label %bb2","%r = icmp ne i32 %a, 0",3,4,-1,control,comparison,1,0,1,0,1,2.0,0
+cand_0515,"%r = xor i32 %a, 0",%r = 0,2,1,1,bitwise,bitwise,1,1,0,1,1,1.5,1
+cand_0516,"%r = shl i32 %a, 0",%r = %a,4,5,-1,bitwise,bitwise,2,2,0,1,1,2.8,0
+cand_0517,%r = call i32 @f(i32 %a),%p = %base,7,4,3,other,memory,4,4,0,1,1,5.3,0
+cand_0518,"store i32 %v, i32* %p",%r = true,5,5,0,memory,comparison,3,2,1,1,0,3.4,0
+cand_0519,"%r = select i1 true, i32 %a, i32 %b",%r = true,2,3,-1,other,comparison,1,0,1,0,1,1.5,0
+cand_0520,"%r = icmp ne i32 %a, 0",%r = true,1,1,0,comparison,comparison,3,1,2,1,0,1.4,0
+cand_0521,%r = call i32 @f(i32 %a),%r = %a,1,2,-1,other,bitwise,2,0,2,0,1,1.3,0
+cand_0522,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",2,2,0,memory,comparison,1,1,0,1,0,1.3,0
+cand_0523,"%p = getelementptr i32, i32* %base, i32 0",%r = false,7,4,3,memory,comparison,1,0,1,0,1,4.4,1
+cand_0524,%r = zext i1 %a to i32,%r = false,5,5,0,conversion,comparison,1,1,0,1,0,2.8,0
+cand_0525,"%r = icmp slt i32 %a, %a",%r = 0,4,1,3,comparison,bitwise,3,0,3,0,1,3.5,0
+cand_0526,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",5,4,1,comparison,arithmetic,3,3,0,1,1,3.6,1
+cand_0527,"%r = lshr i32 %a, 0",%r = true,2,3,-1,bitwise,comparison,4,4,0,1,1,2.4,0
+cand_0528,"%r = icmp ne i32 %a, 0",%r = %a,3,4,-1,comparison,arithmetic,2,0,2,0,1,2.3,1
+cand_0529,"br i1 true, label %bb1, label %bb2",%r = %a,7,5,2,control,bitwise,1,0,1,0,1,4.2,0
+cand_0530,%r = trunc i64 %a to i32,%p = %base,5,6,-1,conversion,memory,4,3,1,1,1,3.9,0
+cand_0531,"%r = mul i32 %a, 1","%r = icmp ne i32 %a, 0",7,6,1,arithmetic,comparison,1,0,1,0,1,4.0,0
+cand_0532,"%r = select i1 true, i32 %a, i32 %b",%r = 0,3,4,-1,other,bitwise,3,2,1,1,1,2.6,1
+cand_0533,%r = zext i1 %a to i32,"%r = add i32 %a, %b",2,2,0,conversion,arithmetic,3,3,0,1,0,1.9,0
+cand_0534,"br i1 true, label %bb1, label %bb2",%r = %a,7,8,-1,control,bitwise,4,2,2,1,1,4.9,0
+cand_0535,%r = trunc i64 %a to i32,%r = 0,4,2,2,conversion,arithmetic,1,0,1,0,1,2.7,0
+cand_0536,%r = zext i1 %a to i32,%r = 0,7,8,-1,conversion,bitwise,4,1,3,1,1,4.9,0
+cand_0537,"%r = select i1 true, i32 %a, i32 %b",%r = %a,3,3,0,other,arithmetic,3,1,2,1,0,2.4,0
+cand_0538,"%r = icmp ne i32 %a, 0",%p = %base,1,2,-1,comparison,memory,2,2,0,1,1,1.3,0
+cand_0539,ret i32 0,%r = true,2,2,0,control,comparison,1,0,1,0,0,1.3,0
+cand_0540,"%r = icmp ne i32 %a, 0",%r = 0,5,5,0,comparison,arithmetic,4,3,1,1,0,3.7,0
+cand_0541,"%r = lshr i32 %a, 0",%r = 0,6,7,-1,bitwise,bitwise,2,2,0,1,1,3.8,0
+cand_0542,"%r = or i32 %a, 0",%p = %base,1,2,-1,bitwise,memory,1,0,1,0,1,1.0,0
+cand_0543,%r = zext i1 %a to i32,%r = 0,4,5,-1,conversion,arithmetic,4,1,3,1,1,3.4,1
+cand_0544,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,2,1,1,memory,memory,4,3,1,1,1,2.4,0
+cand_0545,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",2,2,0,memory,arithmetic,3,3,0,1,0,1.9,1
+cand_0546,%r = trunc i64 %a to i32,%r = false,3,2,1,conversion,comparison,2,1,1,1,1,2.3,0
+cand_0547,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,3,0,memory,bitwise,1,1,0,1,0,1.8,0
+cand_0548,ret i32 0,"%r = icmp ne i32 %a, 0",1,1,0,control,comparison,3,3,0,1,0,1.4,0
+cand_0549,"%r = sub i32 %a, 0",%r = true,5,3,2,arithmetic,comparison,4,3,1,1,1,4.1,1
+cand_0550,"%r = or i32 %a, 0",%r = %a,4,3,1,bitwise,bitwise,1,1,0,1,1,2.5,1
+cand_0551,"%r = lshr i32 %a, 0",%p = %base,4,5,-1,bitwise,memory,1,0,1,0,1,2.5,1
+cand_0552,%r = trunc i64 %a to i32,%p = %base,3,4,-1,conversion,memory,4,4,0,1,1,2.9,0
+cand_0553,"%r = add i32 %a, 0",%r = %a,6,7,-1,arithmetic,bitwise,3,2,1,1,1,4.1,0
+cand_0554,"%r = icmp ne i32 %a, 0","%r = add i32 %a, %b",3,1,2,comparison,arithmetic,3,2,1,1,1,2.8,1
+cand_0555,"%r = icmp ne i32 %a, 0",%r = %a,6,3,3,comparison,arithmetic,1,1,0,1,1,3.9,1
+cand_0556,"store i32 %v, i32* %p",%p = %base,3,1,2,memory,memory,2,1,1,1,1,2.5,0
+cand_0557,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,3,0,memory,bitwise,2,1,1,1,0,2.1,0
+cand_0558,%r = trunc i64 %a to i32,%r = 0,1,1,0,conversion,bitwise,2,1,1,1,0,1.1,0
+cand_0559,"%r = sub i32 %a, 0",%r = 0,4,1,3,arithmetic,arithmetic,2,1,1,1,1,3.2,1
+cand_0560,"store i32 %v, i32* %p","%r = add i32 %a, %b",4,2,2,memory,arithmetic,3,0,3,0,1,3.3,0
+cand_0561,"%r = sub i32 %a, 0",%r = false,2,1,1,arithmetic,comparison,4,4,0,1,1,2.4,1
+cand_0562,%r = zext i1 %a to i32,%p = %base,2,3,-1,conversion,memory,2,2,0,1,1,1.8,0
+cand_0563,"%r = mul i32 %a, 1","%r = icmp ne i32 %a, 0",4,5,-1,arithmetic,comparison,1,0,1,0,1,2.5,0
+cand_0564,%r = call i32 @f(i32 %a),%p = %base,4,4,0,other,memory,3,2,1,1,0,2.9,0
+cand_0565,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,7,7,0,memory,memory,1,1,0,1,0,3.8,1
+cand_0566,"br i1 true, label %bb1, label %bb2",%p = %base,4,3,1,control,memory,1,1,0,1,1,2.5,0
+cand_0567,%r = trunc i64 %a to i32,%r = %a,2,1,1,conversion,bitwise,4,1,3,1,1,2.4,0
+cand_0568,"%r = mul i32 %a, 1",%r = true,3,3,0,arithmetic,comparison,3,2,1,1,0,2.4,1
+cand_0569,"%r = shl i32 %a, 0",%r = %a,1,2,-1,bitwise,bitwise,1,0,1,0,1,1.0,0
+cand_0570,"%r = icmp slt i32 %a, %a",%p = %base,5,3,2,comparison,memory,3,2,1,1,1,3.8,1
+cand_0571,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,4,5,-1,memory,bitwise,3,0,3,0,1,3.1,0
+cand_0572,%r = trunc i64 %a to i32,%p = %base,1,2,-1,conversion,memory,3,2,1,1,1,1.6,0
+cand_0573,"%r = icmp slt i32 %a, %a",%p = %base,6,4,2,comparison,memory,4,0,4,0,1,4.6,1
+cand_0574,"store i32 %v, i32* %p",%r = true,5,2,3,memory,comparison,2,0,2,0,1,3.7,0
+cand_0575,%r = zext i1 %a to i32,"%r = add i32 %a, %b",7,4,3,conversion,arithmetic,1,0,1,0,1,4.4,0
+cand_0576,"%r = icmp slt i32 %a, %a",%r = %a,4,1,3,comparison,arithmetic,2,1,1,1,1,3.2,1
+cand_0577,"%r = shl i32 %a, 0",%r = 0,1,2,-1,bitwise,bitwise,4,1,3,1,1,1.9,1
+cand_0578,"%r = select i1 true, i32 %a, i32 %b",%p = %base,7,8,-1,other,memory,4,3,1,1,1,4.9,0
+cand_0579,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,6,5,1,memory,memory,3,0,3,0,1,4.1,0
+cand_0580,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,2,3,-1,memory,bitwise,4,3,1,1,1,2.4,0
+cand_0581,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,4,2,2,memory,bitwise,3,0,3,0,1,3.3,0
+cand_0582,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,6,4,2,memory,bitwise,4,1,3,1,1,4.6,0
+cand_0583,ret i32 0,%r = 0,1,2,-1,control,arithmetic,3,1,2,1,1,1.6,0
+cand_0584,"%r = icmp eq i32 %a, %a",%p = %base,3,2,1,comparison,memory,3,3,0,1,1,2.6,1
+cand_0585,"%r = select i1 true, i32 %a, i32 %b",%p = %base,4,1,3,other,memory,3,0,3,0,1,3.5,0
+cand_0586,"br i1 true, label %bb1, label %bb2",%r = false,2,1,1,control,comparison,3,0,3,0,1,2.1,1
+cand_0587,%r = zext i1 %a to i32,%r = %a,5,4,1,conversion,bitwise,2,2,0,1,1,3.3,0
+cand_0588,%r = call i32 @f(i32 %a),%r = %a,1,1,0,other,bitwise,2,0,2,0,0,1.1,0
+cand_0589,"%r = mul i32 %a, 1",%r = %a,2,2,0,arithmetic,bitwise,2,1,1,1,0,1.6,0
+cand_0590,"%r = xor i32 %a, 0",%r = 0,3,3,0,bitwise,arithmetic,2,0,2,0,0,2.1,0
+cand_0591,"%r = icmp ne i32 %a, 0",%r = %a,4,5,-1,comparison,arithmetic,2,0,2,0,1,2.8,1
+cand_0592,%r = call i32 @f(i32 %a),%p = %base,4,4,0,other,memory,3,2,1,1,0,2.9,1
+cand_0593,%r = call i32 @f(i32 %a),%r = 0,7,6,1,other,bitwise,1,1,0,1,1,4.0,0
+cand_0594,"%r = icmp ne i32 %a, 0",%r = %a,7,5,2,comparison,bitwise,1,0,1,0,1,4.2,0
+cand_0595,"%r = icmp ne i32 %a, 0",%r = %a,7,6,1,comparison,bitwise,1,0,1,0,1,4.0,0
+cand_0596,"store i32 %v, i32* %p",%p = %base,2,2,0,memory,memory,3,0,3,0,0,1.9,0
+cand_0597,"%r = icmp ne i32 %a, 0",%r = %a,6,4,2,comparison,arithmetic,2,2,0,1,1,4.0,1
+cand_0598,%r = zext i1 %a to i32,%p = %base,4,1,3,conversion,memory,4,0,4,0,1,3.8,1
+cand_0599,ret i32 0,%r = 0,5,3,2,control,arithmetic,3,1,2,1,1,3.8,0
+cand_0600,"%r = icmp slt i32 %a, %a","%r = icmp ne i32 %a, 0",5,4,1,comparison,comparison,1,1,0,1,1,3.0,1
+cand_0601,"%r = select i1 true, i32 %a, i32 %b",%p = %base,4,4,0,other,memory,2,2,0,1,0,2.6,0
+cand_0602,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",2,3,-1,control,arithmetic,4,1,3,1,1,2.4,0
+cand_0603,ret i32 0,%r = 0,6,5,1,control,bitwise,1,0,1,0,1,3.5,0
+cand_0604,"br i1 true, label %bb1, label %bb2",%p = %base,7,4,3,control,memory,1,1,0,1,1,4.4,0
+cand_0605,"%r = and i32 %a, %a",%p = %base,4,1,3,bitwise,memory,2,2,0,1,1,3.2,0
+cand_0606,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",5,6,-1,comparison,arithmetic,1,1,0,1,1,3.0,1
+cand_0607,%r = zext i1 %a to i32,%r = true,1,1,0,conversion,comparison,4,2,2,1,0,1.7,0
+cand_0608,"%r = and i32 %a, %a",%r = false,7,4,3,bitwise,comparison,2,1,1,1,1,4.7,0
+cand_0609,"%r = and i32 %a, %a",%p = %base,7,6,1,bitwise,memory,2,2,0,1,1,4.3,1
+cand_0610,ret i32 0,"%r = add i32 %a, %b",6,6,0,control,arithmetic,4,0,4,0,0,4.2,1
+cand_0611,"%r = or i32 %a, 0",%r = false,5,2,3,bitwise,comparison,1,1,0,1,1,3.4,1
+cand_0612,"%r = add i32 %a, %b",%p = %base,2,1,1,arithmetic,memory,3,2,1,1,1,2.1,1
+cand_0613,"%r = add i32 %a, 0",%r = %a,7,6,1,arithmetic,bitwise,4,2,2,1,1,4.9,1
+cand_0614,"%r = add i32 %a, %b","%r = add i32 %a, %b",6,7,-1,arithmetic,arithmetic,4,0,4,0,1,4.4,0
+cand_0615,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",2,3,-1,memory,arithmetic,1,0,1,0,1,1.5,0
+cand_0616,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,3,1,2,memory,arithmetic,4,3,1,1,1,3.1,0
+cand_0617,"store i32 %v, i32* %p",%p = %base,4,4,0,memory,memory,3,1,2,1,0,2.9,0
+cand_0618,"br i1 true, label %bb1, label %bb2",%r = 0,1,2,-1,control,arithmetic,2,1,1,1,1,1.3,0
+cand_0619,"%r = icmp eq i32 %a, %a",%r = false,4,1,3,comparison,comparison,3,0,3,0,1,3.5,0
+cand_0620,"%r = sub i32 %a, 0",%p = %base,7,4,3,arithmetic,memory,3,2,1,1,1,5.0,1
+cand_0621,"%r = icmp eq i32 %a, %a","%r = add i32 %a, %b",3,2,1,comparison,arithmetic,2,0,2,0,1,2.3,0
+cand_0622,%r = trunc i64 %a to i32,%r = false,7,4,3,conversion,comparison,2,0,2,0,1,4.7,0
+cand_0623,"%r = or i32 %a, 0",%p = %base,5,5,0,bitwise,memory,2,1,1,1,0,3.1,0
+cand_0624,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",4,2,2,conversion,arithmetic,3,2,1,1,1,3.3,0
+cand_0625,"%r = shl i32 %a, 0",%r = 0,1,2,-1,bitwise,bitwise,3,0,3,0,1,1.6,0
+cand_0626,"br i1 true, label %bb1, label %bb2",%r = 0,5,2,3,control,bitwise,1,1,0,1,1,3.4,0
+cand_0627,"%r = lshr i32 %a, 0",%p = %base,4,1,3,bitwise,memory,1,0,1,0,1,2.9,0
+cand_0628,"%r = add i32 %a, 0",%r = 0,7,6,1,arithmetic,bitwise,3,0,3,0,1,4.6,0
+cand_0629,"%r = icmp slt i32 %a, %a","%r = add i32 %a, %b",4,5,-1,comparison,arithmetic,1,1,0,1,1,2.5,0
+cand_0630,"%r = add i32 %a, 0",%p = %base,5,3,2,arithmetic,memory,1,1,0,1,1,3.2,1
+cand_0631,ret i32 0,%r = %a,2,1,1,control,arithmetic,1,0,1,0,1,1.5,0
+cand_0632,%r = zext i1 %a to i32,"%r = icmp ne i32 %a, 0",3,4,-1,conversion,comparison,1,0,1,0,1,2.0,0
+cand_0633,"store i32 %v, i32* %p",%r = %a,7,4,3,memory,bitwise,4,0,4,0,1,5.3,0
+cand_0634,"%r = select i1 true, i32 %a, i32 %b",%p = %base,1,1,0,other,memory,1,0,1,0,0,0.8,0
+cand_0635,"%r = and i32 %a, %a","%r = add i32 %a, %b",7,8,-1,bitwise,arithmetic,1,0,1,0,1,4.0,0
+cand_0636,"%r = icmp ne i32 %a, 0",%r = false,1,2,-1,comparison,comparison,3,1,2,1,1,1.6,0
+cand_0637,"%r = sub i32 %a, 0",%p = %base,2,1,1,arithmetic,memory,3,1,2,1,1,2.1,1
+cand_0638,"br i1 true, label %bb1, label %bb2","%r = add i32 %a, %b",4,3,1,control,arithmetic,3,0,3,0,1,3.1,0
+cand_0639,"br i1 true, label %bb1, label %bb2",%p = %base,2,2,0,control,memory,1,1,0,1,0,1.3,0
+cand_0640,%r = zext i1 %a to i32,%r = 0,1,1,0,conversion,bitwise,3,0,3,0,0,1.4,1
+cand_0641,"br i1 true, label %bb1, label %bb2","%r = icmp ne i32 %a, 0",6,7,-1,control,comparison,1,0,1,0,1,3.5,1
+cand_0642,ret i32 0,"%r = add i32 %a, %b",2,3,-1,control,arithmetic,3,3,0,1,1,2.1,1
+cand_0643,"%r = mul i32 %a, 1",%p = %base,1,1,0,arithmetic,memory,1,0,1,0,0,0.8,0
+cand_0644,"%r = shl i32 %a, 0",%r = %a,1,1,0,bitwise,arithmetic,4,2,2,1,0,1.7,0
+cand_0645,%r = zext i1 %a to i32,%r = %a,7,5,2,conversion,arithmetic,1,0,1,0,1,4.2,0
+cand_0646,"br i1 true, label %bb1, label %bb2",%p = %base,1,1,0,control,memory,1,0,1,0,0,0.8,1
+cand_0647,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",6,7,-1,conversion,arithmetic,2,0,2,0,1,3.8,0
+cand_0648,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",1,2,-1,other,arithmetic,1,1,0,1,1,1.0,1
+cand_0649,"%r = sub i32 %a, 0","%r = add i32 %a, %b",4,1,3,arithmetic,arithmetic,4,3,1,1,1,3.8,1
+cand_0650,"%r = or i32 %a, 0",%r = true,4,5,-1,bitwise,comparison,2,2,0,1,1,2.8,0
+cand_0651,%r = trunc i64 %a to i32,%r = 0,5,2,3,conversion,bitwise,1,1,0,1,1,3.4,0
+cand_0652,%r = trunc i64 %a to i32,%r = %a,6,3,3,conversion,bitwise,1,0,1,0,1,3.9,0
+cand_0653,"%r = or i32 %a, 0",%p = %base,2,1,1,bitwise,memory,3,1,2,1,1,2.1,0
+cand_0654,"%r = shl i32 %a, 0","%r = add i32 %a, %b",4,3,1,bitwise,arithmetic,3,0,3,0,1,3.1,0
+cand_0655,"%r = icmp ne i32 %a, 0",%r = false,1,2,-1,comparison,comparison,1,1,0,1,1,1.0,0
+cand_0656,%r = trunc i64 %a to i32,%p = %base,7,7,0,conversion,memory,3,2,1,1,0,4.4,0
+cand_0657,"%r = sub i32 %a, %a",%r = %a,2,1,1,arithmetic,arithmetic,1,0,1,0,1,1.5,0
+cand_0658,"%r = shl i32 %a, 0",%r = true,7,7,0,bitwise,comparison,4,2,2,1,0,4.7,0
+cand_0659,"%r = and i32 %a, %a",%r = %a,5,2,3,bitwise,bitwise,4,1,3,1,1,4.3,1
+cand_0660,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,1,2,-1,memory,memory,2,2,0,1,1,1.3,0
+cand_0661,"%r = add i32 %a, %b",%p = %base,5,4,1,arithmetic,memory,1,0,1,0,1,3.0,0
+cand_0662,"%r = or i32 %a, 0",%r = %a,2,1,1,bitwise,bitwise,1,1,0,1,1,1.5,1
+cand_0663,"%r = sub i32 %a, 0",%r = 0,4,5,-1,arithmetic,arithmetic,1,0,1,0,1,2.5,0
+cand_0664,ret i32 0,%p = %base,7,6,1,control,memory,3,3,0,1,1,4.6,1
+cand_0665,"%r = icmp ne i32 %a, 0",%p = %base,4,2,2,comparison,memory,2,0,2,0,1,3.0,0
+cand_0666,"%r = icmp slt i32 %a, %a",%r = %a,1,2,-1,comparison,bitwise,3,2,1,1,1,1.6,0
+cand_0667,ret i32 0,%r = %a,2,3,-1,control,arithmetic,1,0,1,0,1,1.5,0
+cand_0668,"%r = or i32 %a, 0",%r = %a,1,1,0,bitwise,arithmetic,1,1,0,1,0,0.8,0
+cand_0669,%r = trunc i64 %a to i32,%r = 0,1,1,0,conversion,bitwise,2,0,2,0,0,1.1,0
+cand_0670,"%r = icmp eq i32 %a, %a",%r = 0,7,8,-1,comparison,arithmetic,2,1,1,1,1,4.3,0
+cand_0671,"%p = getelementptr i32, i32* %base, i32 0",%r = false,4,5,-1,memory,comparison,1,0,1,0,1,2.5,0
+cand_0672,"%r = select i1 true, i32 %a, i32 %b",%r = %a,5,5,0,other,arithmetic,2,0,2,0,0,3.1,1
+cand_0673,"%r = and i32 %a, %a",%r = 0,6,6,0,bitwise,arithmetic,1,1,0,1,0,3.3,1
+cand_0674,"%r = add i32 %a, %b",%r = 0,4,2,2,arithmetic,bitwise,3,2,1,1,1,3.3,1
+cand_0675,"%r = lshr i32 %a, 0",%r = %a,1,2,-1,bitwise,bitwise,2,2,0,1,1,1.3,0
+cand_0676,"%r = mul i32 %a, 1",%r = %a,1,2,-1,arithmetic,arithmetic,2,0,2,0,1,1.3,0
+cand_0677,"%r = sub i32 %a, 0",%r = true,3,1,2,arithmetic,comparison,4,0,4,0,1,3.1,0
+cand_0678,"%r = icmp slt i32 %a, %a",%r = 0,1,2,-1,comparison,arithmetic,4,4,0,1,1,1.9,0
+cand_0679,"store i32 %v, i32* %p",%r = %a,4,1,3,memory,bitwise,1,1,0,1,1,2.9,1
+cand_0680,%r = trunc i64 %a to i32,%r = 0,3,1,2,conversion,bitwise,4,2,2,1,1,3.1,0
+cand_0681,"%p = getelementptr i32, i32* %base, i32 0","%r = icmp ne i32 %a, 0",2,3,-1,memory,comparison,4,2,2,1,1,2.4,0
+cand_0682,ret i32 0,%r = %a,1,2,-1,control,arithmetic,2,0,2,0,1,1.3,0
+cand_0683,"store i32 %v, i32* %p",%r = 0,2,2,0,memory,bitwise,2,1,1,1,0,1.6,0
+cand_0684,"%r = select i1 true, i32 %a, i32 %b",%r = true,2,2,0,other,comparison,3,3,0,1,0,1.9,1
+cand_0685,"br i1 true, label %bb1, label %bb2",%r = false,4,4,0,control,comparison,4,3,1,1,0,3.2,0
+cand_0686,"%r = icmp ne i32 %a, 0",%r = %a,7,4,3,comparison,bitwise,3,0,3,0,1,5.0,0
+cand_0687,"%r = lshr i32 %a, 0",%r = %a,3,2,1,bitwise,bitwise,3,2,1,1,1,2.6,1
+cand_0688,"%r = or i32 %a, 0",%r = false,7,5,2,bitwise,comparison,1,0,1,0,1,4.2,0
+cand_0689,"%r = sub i32 %a, 0",%r = 0,5,3,2,arithmetic,bitwise,3,2,1,1,1,3.8,0
+cand_0690,"%r = icmp ne i32 %a, 0",%r = 0,1,2,-1,comparison,bitwise,3,0,3,0,1,1.6,0
+cand_0691,"%r = icmp slt i32 %a, %a","%r = icmp ne i32 %a, 0",6,5,1,comparison,comparison,3,0,3,0,1,4.1,0
+cand_0692,"%r = icmp slt i32 %a, %a",%p = %base,1,1,0,comparison,memory,1,1,0,1,0,0.8,0
+cand_0693,%r = call i32 @f(i32 %a),"%r = icmp ne i32 %a, 0",2,2,0,other,comparison,3,3,0,1,0,1.9,0
+cand_0694,%r = call i32 @f(i32 %a),%r = %a,2,3,-1,other,arithmetic,1,0,1,0,1,1.5,1
+cand_0695,"%r = select i1 true, i32 %a, i32 %b","%r = add i32 %a, %b",6,7,-1,other,arithmetic,4,4,0,1,1,4.4,0
+cand_0696,"%r = sub i32 %a, %a",%r = %a,5,6,-1,arithmetic,bitwise,1,1,0,1,1,3.0,0
+cand_0697,"store i32 %v, i32* %p",%r = 0,7,8,-1,memory,arithmetic,4,2,2,1,1,4.9,0
+cand_0698,"%r = and i32 %a, %a",%r = false,1,2,-1,bitwise,comparison,3,3,0,1,1,1.6,1
+cand_0699,"store i32 %v, i32* %p",%r = %a,3,3,0,memory,bitwise,1,0,1,0,0,1.8,1
+cand_0700,%r = zext i1 %a to i32,%r = %a,6,4,2,conversion,arithmetic,4,2,2,1,1,4.6,0
+cand_0701,"br i1 true, label %bb1, label %bb2",%r = 0,2,2,0,control,bitwise,3,2,1,1,0,1.9,0
+cand_0702,%r = call i32 @f(i32 %a),%r = 0,6,6,0,other,bitwise,3,0,3,0,0,3.9,0
+cand_0703,"%r = select i1 true, i32 %a, i32 %b",%r = false,1,1,0,other,comparison,3,3,0,1,0,1.4,1
+cand_0704,"%r = icmp eq i32 %a, %a",%r = true,5,3,2,comparison,comparison,2,2,0,1,1,3.5,1
+cand_0705,"%r = add i32 %a, %b","%r = add i32 %a, %b",7,4,3,arithmetic,arithmetic,2,0,2,0,1,4.7,0
+cand_0706,%r = trunc i64 %a to i32,%p = %base,6,3,3,conversion,memory,3,3,0,1,1,4.5,1
+cand_0707,"%r = sub i32 %a, 0","%r = add i32 %a, %b",2,3,-1,arithmetic,arithmetic,3,3,0,1,1,2.1,0
+cand_0708,"%r = mul i32 %a, 1","%r = add i32 %a, %b",1,2,-1,arithmetic,arithmetic,2,1,1,1,1,1.3,1
+cand_0709,"%r = icmp eq i32 %a, %a",%r = 0,6,6,0,comparison,bitwise,1,1,0,1,0,3.3,0
+cand_0710,"store i32 %v, i32* %p",%r = %a,6,7,-1,memory,bitwise,4,2,2,1,1,4.4,0
+cand_0711,"store i32 %v, i32* %p",%r = 0,3,3,0,memory,bitwise,3,1,2,1,0,2.4,0
+cand_0712,"%r = or i32 %a, 0",%p = %base,3,3,0,bitwise,memory,2,1,1,1,0,2.1,0
+cand_0713,ret i32 0,%p = %base,4,3,1,control,memory,3,0,3,0,1,3.1,0
+cand_0714,"%r = icmp eq i32 %a, %a",%r = false,6,4,2,comparison,comparison,3,1,2,1,1,4.3,0
+cand_0715,%r = call i32 @f(i32 %a),%p = %base,4,4,0,other,memory,2,0,2,0,0,2.6,0
+cand_0716,%r = trunc i64 %a to i32,"%r = icmp ne i32 %a, 0",6,4,2,conversion,comparison,2,1,1,1,1,4.0,0
+cand_0717,"%r = icmp ne i32 %a, 0",%r = %a,1,2,-1,comparison,bitwise,3,3,0,1,1,1.6,0
+cand_0718,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,6,6,0,memory,bitwise,3,1,2,1,0,3.9,0
+cand_0719,%r = call i32 @f(i32 %a),"%r = add i32 %a, %b",7,5,2,other,arithmetic,4,2,2,1,1,5.1,0
+cand_0720,%r = trunc i64 %a to i32,%p = %base,2,1,1,conversion,memory,3,3,0,1,1,2.1,0
+cand_0721,ret i32 0,%p = %base,6,3,3,control,memory,3,1,2,1,1,4.5,0
+cand_0722,"store i32 %v, i32* %p","%r = icmp ne i32 %a, 0",1,2,-1,memory,comparison,1,0,1,0,1,1.0,1
+cand_0723,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,1,1,0,memory,memory,2,0,2,0,0,1.1,0
+cand_0724,"%r = icmp ne i32 %a, 0",%p = %base,5,3,2,comparison,memory,3,2,1,1,1,3.8,1
+cand_0725,"%r = lshr i32 %a, 0",%r = %a,7,7,0,bitwise,bitwise,3,2,1,1,0,4.4,0
+cand_0726,"%r = lshr i32 %a, 0",%r = true,4,3,1,bitwise,comparison,2,2,0,1,1,2.8,1
+cand_0727,"%r = sub i32 %a, 0",%r = %a,7,7,0,arithmetic,bitwise,3,1,2,1,0,4.4,0
+cand_0728,"store i32 %v, i32* %p",%r = 0,6,7,-1,memory,arithmetic,2,1,1,1,1,3.8,0
+cand_0729,ret i32 0,"%r = icmp ne i32 %a, 0",5,5,0,control,comparison,3,0,3,0,0,3.4,0
+cand_0730,"%r = xor i32 %a, 0",%r = 0,6,6,0,bitwise,bitwise,4,0,4,0,0,4.2,0
+cand_0731,%r = zext i1 %a to i32,"%r = add i32 %a, %b",6,7,-1,conversion,arithmetic,1,0,1,0,1,3.5,0
+cand_0732,"%p = getelementptr i32, i32* %base, i32 0","%r = icmp ne i32 %a, 0",3,1,2,memory,comparison,4,2,2,1,1,3.1,1
+cand_0733,%r = zext i1 %a to i32,%r = 0,6,6,0,conversion,arithmetic,4,3,1,1,0,4.2,0
+cand_0734,%r = zext i1 %a to i32,%p = %base,6,7,-1,conversion,memory,2,0,2,0,1,3.8,0
+cand_0735,"%r = icmp eq i32 %a, %a",%r = 0,4,5,-1,comparison,bitwise,1,0,1,0,1,2.5,1
+cand_0736,"%r = shl i32 %a, 0","%r = add i32 %a, %b",4,5,-1,bitwise,arithmetic,3,3,0,1,1,3.1,0
+cand_0737,"%r = and i32 %a, %a",%r = 0,5,3,2,bitwise,bitwise,2,0,2,0,1,3.5,0
+cand_0738,"%p = getelementptr i32, i32* %base, i32 0",%p = %base,6,3,3,memory,memory,3,0,3,0,1,4.5,0
+cand_0739,"%r = or i32 %a, 0",%r = 0,2,2,0,bitwise,bitwise,3,1,2,1,0,1.9,0
+cand_0740,"br i1 true, label %bb1, label %bb2",%p = %base,5,4,1,control,memory,3,1,2,1,1,3.6,0
+cand_0741,%r = zext i1 %a to i32,%r = %a,2,3,-1,conversion,bitwise,3,2,1,1,1,2.1,0
+cand_0742,"%r = shl i32 %a, 0",%p = %base,3,3,0,bitwise,memory,2,1,1,1,0,2.1,0
+cand_0743,"%r = select i1 true, i32 %a, i32 %b",%p = %base,5,2,3,other,memory,1,0,1,0,1,3.4,0
+cand_0744,"%p = getelementptr i32, i32* %base, i32 0",%r = true,6,5,1,memory,comparison,2,1,1,1,1,3.8,0
+cand_0745,"%r = add i32 %a, %b",%r = %a,2,3,-1,arithmetic,arithmetic,3,2,1,1,1,2.1,1
+cand_0746,"%r = add i32 %a, %b",%p = %base,5,2,3,arithmetic,memory,2,0,2,0,1,3.7,0
+cand_0747,%r = trunc i64 %a to i32,"%r = add i32 %a, %b",3,2,1,conversion,arithmetic,1,0,1,0,1,2.0,0
+cand_0748,"%r = icmp eq i32 %a, %a",%p = %base,3,3,0,comparison,memory,1,1,0,1,0,1.8,1
+cand_0749,"store i32 %v, i32* %p",%r = %a,7,6,1,memory,arithmetic,3,3,0,1,1,4.6,0
+cand_0750,"%r = select i1 true, i32 %a, i32 %b",%p = %base,4,5,-1,other,memory,1,1,0,1,1,2.5,0
+cand_0751,"%r = or i32 %a, 0",%r = %a,2,2,0,bitwise,bitwise,1,1,0,1,0,1.3,0
+cand_0752,"br i1 true, label %bb1, label %bb2",%p = %base,5,5,0,control,memory,2,0,2,0,0,3.1,0
+cand_0753,%r = zext i1 %a to i32,%p = %base,3,2,1,conversion,memory,4,2,2,1,1,2.9,1
+cand_0754,"%r = xor i32 %a, 0","%r = add i32 %a, %b",6,3,3,bitwise,arithmetic,1,1,0,1,1,3.9,1
+cand_0755,"store i32 %v, i32* %p",%p = %base,1,2,-1,memory,memory,2,1,1,1,1,1.3,0
+cand_0756,"%r = icmp slt i32 %a, %a",%r = %a,5,2,3,comparison,bitwise,1,1,0,1,1,3.4,1
+cand_0757,"%r = xor i32 %a, 0",%p = %base,7,6,1,bitwise,memory,2,0,2,0,1,4.3,1
+cand_0758,"%r = sub i32 %a, 0",%r = 0,4,4,0,arithmetic,arithmetic,4,0,4,0,0,3.2,0
+cand_0759,"br i1 true, label %bb1, label %bb2",%r = true,1,1,0,control,comparison,1,1,0,1,0,0.8,0
+cand_0760,ret i32 0,%p = %base,6,6,0,control,memory,4,0,4,0,0,4.2,0
+cand_0761,"br i1 true, label %bb1, label %bb2",%p = %base,7,8,-1,control,memory,4,4,0,1,1,4.9,0
+cand_0762,%r = trunc i64 %a to i32,%p = %base,7,6,1,conversion,memory,2,0,2,0,1,4.3,0
+cand_0763,ret i32 0,%p = %base,2,2,0,control,memory,3,3,0,1,0,1.9,0
+cand_0764,%r = trunc i64 %a to i32,%r = false,2,2,0,conversion,comparison,3,0,3,0,0,1.9,0
+cand_0765,"%r = select i1 true, i32 %a, i32 %b",%r = 0,5,5,0,other,bitwise,3,3,0,1,0,3.4,0
+cand_0766,"%r = select i1 true, i32 %a, i32 %b",%r = 0,6,7,-1,other,bitwise,4,3,1,1,1,4.4,0
+cand_0767,"%r = and i32 %a, %a",%r = %a,6,7,-1,bitwise,arithmetic,3,0,3,0,1,4.1,0
+cand_0768,%r = zext i1 %a to i32,%p = %base,7,7,0,conversion,memory,2,1,1,1,0,4.1,1
+cand_0769,%r = trunc i64 %a to i32,%r = false,6,5,1,conversion,comparison,1,1,0,1,1,3.5,0
+cand_0770,"%p = getelementptr i32, i32* %base, i32 0",%r = %a,2,1,1,memory,bitwise,1,1,0,1,1,1.5,0
+cand_0771,"store i32 %v, i32* %p",%r = %a,3,1,2,memory,bitwise,2,0,2,0,1,2.5,0
+cand_0772,%r = zext i1 %a to i32,%r = false,2,2,0,conversion,comparison,1,1,0,1,0,1.3,0
+cand_0773,"%r = icmp slt i32 %a, %a",%p = %base,3,3,0,comparison,memory,3,3,0,1,0,2.4,0
+cand_0774,%r = trunc i64 %a to i32,%r = %a,5,5,0,conversion,bitwise,1,1,0,1,0,2.8,1
+cand_0775,"%r = select i1 true, i32 %a, i32 %b",%r = %a,6,4,2,other,bitwise,4,2,2,1,1,4.6,0
+cand_0776,"%p = getelementptr i32, i32* %base, i32 0",%r = 0,7,6,1,memory,arithmetic,1,1,0,1,1,4.0,0
+cand_0777,"br i1 true, label %bb1, label %bb2",%r = true,3,1,2,control,comparison,1,1,0,1,1,2.2,0
+cand_0778,"%p = getelementptr i32, i32* %base, i32 0",%r = true,5,4,1,memory,comparison,4,3,1,1,1,3.9,1
+cand_0779,"%r = and i32 %a, %a",%r = %a,2,1,1,bitwise,bitwise,2,1,1,1,1,1.8,1
+cand_0780,"%r = sub i32 %a, %a",%r = %a,5,5,0,arithmetic,bitwise,3,2,1,1,0,3.4,0
+cand_0781,%r = zext i1 %a to i32,%p = %base,1,2,-1,conversion,memory,3,0,3,0,1,1.6,0
+cand_0782,"%r = icmp eq i32 %a, %a",%r = 0,7,6,1,comparison,bitwise,1,0,1,0,1,4.0,0
+cand_0783,ret i32 0,%p = %base,3,3,0,control,memory,1,1,0,1,0,1.8,0
+cand_0784,"%r = sub i32 %a, 0",%r = 0,4,2,2,arithmetic,bitwise,2,0,2,0,1,3.0,0
+cand_0785,"%r = select i1 true, i32 %a, i32 %b",%r = false,4,3,1,other,comparison,3,3,0,1,1,3.1,0
+cand_0786,"%p = getelementptr i32, i32* %base, i32 0","%r = add i32 %a, %b",4,4,0,memory,arithmetic,3,3,0,1,0,2.9,0
+cand_0787,%r = trunc i64 %a to i32,%r = %a,5,6,-1,conversion,bitwise,3,2,1,1,1,3.6,0
+cand_0788,ret i32 0,%p = %base,4,2,2,control,memory,3,2,1,1,1,3.3,0
+cand_0789,"%r = sub i32 %a, %a",%r = %a,4,3,1,arithmetic,bitwise,3,1,2,1,1,3.1,1
+cand_0790,"%p = getelementptr i32, i32* %base, i32 0",%r = false,2,1,1,memory,comparison,2,2,0,1,1,1.8,0
+cand_0791,"store i32 %v, i32* %p","%r = add i32 %a, %b",1,1,0,memory,arithmetic,4,0,4,0,0,1.7,0
+cand_0792,"%r = and i32 %a, %a",%p = %base,4,2,2,bitwise,memory,2,1,1,1,1,3.0,1
+cand_0793,"%r = or i32 %a, 0",%r = true,4,1,3,bitwise,comparison,2,2,0,1,1,3.2,0
+cand_0794,"%r = add i32 %a, 0",%r = true,7,7,0,arithmetic,comparison,2,0,2,0,0,4.1,1
+cand_0795,%r = call i32 @f(i32 %a),%p = %base,3,2,1,other,memory,3,2,1,1,1,2.6,0
+cand_0796,%r = call i32 @f(i32 %a),%r = 0,2,3,-1,other,bitwise,1,0,1,0,1,1.5,0
+cand_0797,%r = trunc i64 %a to i32,%p = %base,3,2,1,conversion,memory,3,0,3,0,1,2.6,0
+cand_0798,ret i32 0,"%r = icmp ne i32 %a, 0",4,5,-1,control,comparison,4,4,0,1,1,3.4,0
+cand_0799,"%r = icmp eq i32 %a, %a",%p = %base,1,2,-1,comparison,memory,1,0,1,0,1,1.0,0
