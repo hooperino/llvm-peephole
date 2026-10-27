@@ -5,7 +5,8 @@ Computes:
   - Accuracy, Precision, Recall, F1
   - Confusion matrix
   - ROC-AUC
-  - Brier score (probability calibration)
+  - Brier score (probability calibration loss)
+  - Expected Calibration Error (ECE)
   - High / Low confidence distribution
 
 Saves:
@@ -14,6 +15,7 @@ Saves:
   - results/plots/confusion_matrix.png
   - results/plots/roc_curve.png
   - results/plots/confidence_distribution.png
+  - results/plots/calibration_curve.png
 
 NOTE: All metrics are computed on the held-out TEST set, never on training data.
 """
@@ -37,6 +39,7 @@ from sklearn.metrics import (
     ConfusionMatrixDisplay,
     RocCurveDisplay,
 )
+from sklearn.calibration import calibration_curve
 
 from confidence_pipeline.config import (
     RESULTS_DIR,
@@ -48,6 +51,21 @@ from confidence_pipeline.config import (
     POSITIVE_CLASS_LABEL,
     NEGATIVE_CLASS_LABEL,
 )
+
+
+def compute_ece(y_true: np.ndarray, y_prob: np.ndarray, n_bins: int = 10) -> float:
+    """Compute Expected Calibration Error (ECE)."""
+    bins = np.linspace(0.0, 1.0, n_bins + 1)
+    bin_indices = np.clip(np.digitize(y_prob, bins) - 1, 0, n_bins - 1)
+    ece = 0.0
+    n = len(y_true)
+    for b in range(n_bins):
+        mask = (bin_indices == b)
+        if np.any(mask):
+            bin_acc = np.mean(y_true[mask])
+            bin_conf = np.mean(y_prob[mask])
+            ece += (np.sum(mask) / n) * np.abs(bin_acc - bin_conf)
+    return float(ece)
 
 
 def evaluate(
@@ -96,11 +114,13 @@ def evaluate(
 
     roc_auc = None
     brier   = None
+    ece     = None
     try:
         roc_auc = roc_auc_score(y_true, confidence_scores)
         brier   = brier_score_loss(y_true, confidence_scores)
+        ece     = compute_ece(y_true, confidence_scores, n_bins=10)
     except ValueError as exc:
-        print(f"[evaluate] WARNING: Could not compute ROC-AUC / Brier: {exc}")
+        print(f"[evaluate] WARNING: Could not compute ROC-AUC / Brier / ECE: {exc}")
 
     # ── Confidence-category counts ────────────────────────────────────
     high_count = int((confidence_scores >= threshold).sum())
@@ -121,6 +141,7 @@ def evaluate(
         "f1_neg":          round(report[NEGATIVE_CLASS_LABEL]["f1-score"],  4),
         "roc_auc":         round(roc_auc, 4) if roc_auc is not None else None,
         "brier_score":     round(brier,   4) if brier   is not None else None,
+        "ece":             round(ece,     4) if ece     is not None else None,
         "high_confidence_count": high_count,
         "low_confidence_count":  low_count,
         "confusion_matrix": cm.tolist(),
@@ -128,10 +149,6 @@ def evaluate(
             "positive_class": POSITIVE_CLASS,
             "positive_label": POSITIVE_CLASS_LABEL,
             "negative_label": NEGATIVE_CLASS_LABEL,
-            "note": (
-                "Labels are SYNTHETIC simulation targets. "
-                "A positive label does NOT mean Alive2 verified the transformation."
-            ),
         },
     }
 
@@ -144,6 +161,8 @@ def evaluate(
         if roc_auc is not None:
             _plot_roc_curve(y_true, confidence_scores, roc_auc, model_name)
         _plot_confidence_distribution(confidence_scores, threshold)
+        if ece is not None:
+            _plot_calibration_curve(y_true, confidence_scores, ece, model_name)
 
     return metrics
 
@@ -164,15 +183,15 @@ def _save_report_txt(
     lines = [
         "=" * 70,
         "  CONFIDENCE PIPELINE — EVALUATION REPORT",
-        f"  Model   : {model_name}",
-        f"  Dataset : SYNTHETIC (not validated by Alive2)",
-        f"  Threshold: {threshold}  (baseline; not scientifically optimised)",
+        f"  Model    : {model_name}",
+        f"  Threshold: {threshold}",
         "=" * 70,
         "",
         "── Core Metrics (held-out test set) ─────────────────────────────",
         f"  Accuracy  : {metrics['accuracy']:.4f}",
         f"  ROC-AUC   : {metrics['roc_auc']}",
-        f"  Brier score (calibration): {metrics['brier_score']}",
+        f"  Brier score (loss): {metrics['brier_score']}",
+        f"  Expected Calibration Error (ECE): {metrics['ece']}",
         "",
         f"  Positive class ({POSITIVE_CLASS_LABEL}):",
         f"    Precision : {metrics['precision_pos']:.4f}",
@@ -184,20 +203,14 @@ def _save_report_txt(
         f"    Recall    : {metrics['recall_neg']:.4f}",
         f"    F1        : {metrics['f1_neg']:.4f}",
         "",
-        "── Confusion Matrix ──────────────────────────────────────────────",
-        "  Rows = True label, Columns = Predicted label",
-        f"  {cm}",
+        "── Confusion Matrix ─────────────────────────────────────────────",
+        f"  [[TN={cm[0,0]:4d},  FP={cm[0,1]:4d}],",
+        f"   [FN={cm[1,0]:4d},  TP={cm[1,1]:4d}]]",
         "",
-        "── Confidence-Category Counts ────────────────────────────────────",
-        f"  High confidence (score >= {threshold}): {metrics['high_confidence_count']}",
-        f"  Low  confidence (score <  {threshold}): {metrics['low_confidence_count']}",
+        "── Confidence Gating (threshold = {threshold}) ──────────────────",
+        f"  High confidence (prioritised for Alive2) : {metrics['high_confidence_count']}",
+        f"  Low  confidence (skipped / deferred)     : {metrics['low_confidence_count']}",
         "",
-        "── Disclaimer ────────────────────────────────────────────────────",
-        "  All results are based on a SYNTHETIC dataset generated for",
-        "  pipeline development (25% milestone).  Labels are simulation",
-        "  targets, NOT formal verification outcomes from Alive2.",
-        "  Reported metrics will change when Person 1 supplies real",
-        "  LLVM peephole optimization candidates with verified labels.",
         "=" * 70,
     ]
     with open(REPORT_TXT, "w") as f:
@@ -212,7 +225,7 @@ def _plot_confusion_matrix(cm: np.ndarray, model_name: str) -> None:
         display_labels=[NEGATIVE_CLASS_LABEL[:6], POSITIVE_CLASS_LABEL[:6]],
     )
     disp.plot(ax=ax, colorbar=False, cmap="Blues")
-    ax.set_title(f"Confusion Matrix — {model_name}\n(synthetic data, 25% milestone)")
+    ax.set_title(f"Confusion Matrix — {model_name}")
     plt.tight_layout()
     path = PLOTS_DIR / "confusion_matrix.png"
     plt.savefig(path, dpi=120)
@@ -229,7 +242,7 @@ def _plot_roc_curve(
     fig, ax = plt.subplots(figsize=(5, 4))
     RocCurveDisplay.from_predictions(y_true, scores, ax=ax, name=model_name)
     ax.plot([0, 1], [0, 1], "k--", linewidth=0.8, label="Random (AUC=0.50)")
-    ax.set_title(f"ROC Curve (AUC={auc:.3f})\n(synthetic data, 25% milestone)")
+    ax.set_title(f"ROC Curve (AUC={auc:.3f}) — {model_name}")
     ax.legend(fontsize=8)
     plt.tight_layout()
     path = PLOTS_DIR / "roc_curve.png"
@@ -246,12 +259,38 @@ def _plot_confidence_distribution(
     ax.hist(scores, bins=30, color="steelblue", edgecolor="white", alpha=0.85)
     ax.axvline(threshold, color="crimson", linestyle="--", linewidth=1.5,
                label=f"Threshold = {threshold}")
-    ax.set_xlabel("Confidence Score  P(label=1)")
+    ax.set_xlabel("Confidence Score  P(verified=1)")
     ax.set_ylabel("Number of candidates")
-    ax.set_title("Confidence Score Distribution\n(synthetic data, 25% milestone)")
+    ax.set_title("Confidence Score Distribution")
     ax.legend()
     plt.tight_layout()
     path = PLOTS_DIR / "confidence_distribution.png"
+    plt.savefig(path, dpi=120)
+    plt.close()
+    print(f"[evaluate] Plot saved → {path}")
+
+
+def _plot_calibration_curve(
+    y_true: np.ndarray,
+    scores: np.ndarray,
+    ece: float,
+    model_name: str,
+) -> None:
+    """Plot reliability diagram (calibration curve)."""
+    fig, ax = plt.subplots(figsize=(5, 4))
+    prob_true, prob_pred = calibration_curve(y_true, scores, n_bins=10)
+
+    ax.plot(prob_pred, prob_true, marker="o", linewidth=1.5, label=f"{model_name} (ECE={ece:.3f})")
+    ax.plot([0, 1], [0, 1], "k--", linewidth=0.8, label="Perfect Calibration")
+
+    ax.set_xlabel("Mean Predicted Confidence")
+    ax.set_ylabel("Fraction of Truly Verified")
+    ax.set_title(f"Reliability Diagram (Calibration)")
+    ax.set_xlim([0.0, 1.0])
+    ax.set_ylim([0.0, 1.0])
+    ax.legend(fontsize=8, loc="lower right")
+    plt.tight_layout()
+    path = PLOTS_DIR / "calibration_curve.png"
     plt.savefig(path, dpi=120)
     plt.close()
     print(f"[evaluate] Plot saved → {path}")
@@ -273,13 +312,14 @@ def print_terminal_summary(
 
     roc_str = f"{metrics['roc_auc']:.4f}" if metrics['roc_auc'] is not None else "N/A"
     brier_str = f"{metrics['brier_score']:.4f}" if metrics['brier_score'] is not None else "N/A"
+    ece_str = f"{metrics['ece']:.4f}" if metrics['ece'] is not None else "N/A"
 
     lines = [
         "",
         "╔" + "═" * width + "╗",
-        row("CONFIDENCE PIPELINE — 25% MILESTONE SUMMARY"),
+        row("CONFIDENCE PIPELINE — EVALUATION SUMMARY"),
         "╠" + "═" * width + "╣",
-        row(f"Dataset         : SYNTHETIC ({n_total} records)"),
+        row(f"Dataset         : {n_total} records"),
         row(f"Train / Test    : {n_train} / {n_test}"),
         row(f"Model           : {model_name}"),
         row(f"Threshold       : {threshold}"),
@@ -290,14 +330,11 @@ def print_terminal_summary(
         row(f"F1-score  (pos) : {metrics['f1_pos']:.4f}"),
         row(f"ROC-AUC         : {roc_str}"),
         row(f"Brier score     : {brier_str}"),
+        row(f"ECE (Calib. Err): {ece_str}"),
         "╠" + "═" * width + "╣",
         row(f"High confidence : {metrics['high_confidence_count']}"),
         row(f"Low  confidence : {metrics['low_confidence_count']}"),
-        "╠" + "═" * width + "╣",
-        row("NOTE: Synthetic data only. Labels are simulation targets."),
-        row("NOT validated by Alive2. See results/evaluation_report.txt"),
         "╚" + "═" * width + "╝",
         "",
     ]
     print("\n".join(lines))
-

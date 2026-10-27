@@ -2,28 +2,11 @@
 """
 run_pipeline.py — Command-line entry point for the confidence pipeline.
 
-Usage (from project root, with the .venv activated or via its python):
-
-  # 1. Generate synthetic dataset
-  python src/run_pipeline.py generate
-
-  # 2. Train model (uses synthetic dataset by default)
-  python src/run_pipeline.py train
-
-  # 3. Evaluate + produce predictions on test set
-  python src/run_pipeline.py evaluate
-
-  # 4. Score a new candidate CSV using the saved model
-  python src/run_pipeline.py predict --input data/my_candidates.csv
-
-  # 5. Run full pipeline: generate → train → evaluate
-  python src/run_pipeline.py all
-
-Options (apply to multiple sub-commands):
-  --model  {logistic_regression,random_forest}   (default: logistic_regression)
-  --threshold  FLOAT                             (default: 0.50)
-  --input  PATH                                  CSV file to score (predict mode)
-  --output PATH                                  Output predictions CSV
+Usage:
+  python src/run_pipeline.py train --input data/real_candidates.csv --model random_forest --calibrate
+  python src/run_pipeline.py evaluate --input data/real_candidates.csv
+  python src/run_pipeline.py predict --input data/real_candidates.csv
+  python src/run_pipeline.py all --input data/real_candidates.csv
 """
 
 from __future__ import annotations
@@ -39,10 +22,18 @@ if str(_src) not in sys.path:
 
 from confidence_pipeline.config import (
     SYNTHETIC_CSV,
+    REAL_CANDIDATES_CSV,
     MODEL_PATH,
     PREDICTIONS_CSV,
     CONFIDENCE_THRESHOLD,
 )
+
+
+def get_default_csv() -> Path:
+    """Return REAL_CANDIDATES_CSV if it exists, otherwise SYNTHETIC_CSV."""
+    if REAL_CANDIDATES_CSV.exists():
+        return REAL_CANDIDATES_CSV
+    return SYNTHETIC_CSV
 
 
 def cmd_generate(args: argparse.Namespace) -> None:
@@ -57,9 +48,9 @@ def cmd_train(args: argparse.Namespace) -> None:
     from confidence_pipeline.data_loader import load_and_validate
     from confidence_pipeline.train import train
 
-    csv_path = Path(args.input) if args.input else SYNTHETIC_CSV
+    csv_path = Path(args.input) if args.input else get_default_csv()
     df = load_and_validate(csv_path)
-    train(df, model_type=args.model)
+    train(df, model_type=args.model, calibrate=args.calibrate)
 
 
 def cmd_evaluate(args: argparse.Namespace) -> None:
@@ -73,11 +64,10 @@ def cmd_evaluate(args: argparse.Namespace) -> None:
     from sklearn.model_selection import train_test_split
     import numpy as np
 
-    csv_path = Path(args.input) if args.input else SYNTHETIC_CSV
+    csv_path = Path(args.input) if args.input else get_default_csv()
     df = load_and_validate(csv_path)
 
     # Re-create the same train/test split used during training
-    from confidence_pipeline.config import LABEL_COL
     X = df[FEATURE_COLS]
     y = df[LABEL_COL]
     _, X_test, _, y_test = train_test_split(
@@ -101,47 +91,69 @@ def cmd_evaluate(args: argparse.Namespace) -> None:
         save=True,
     )
 
-    n_train = int(len(df) * (1 - TEST_SIZE))
-    n_test  = len(test_df)
-    print_terminal_summary(metrics, len(df), n_train, n_test, args.model, threshold)
+    n_total = len(df)
+    n_train = n_total - len(test_df)
+    n_test = len(test_df)
 
-
-def cmd_predict(args: argparse.Namespace) -> None:
-    from confidence_pipeline.predict import predict_from_saved_model
-
-    if not args.input:
-        print("ERROR: --input is required for predict mode.", file=sys.stderr)
-        sys.exit(1)
-
-    out = Path(args.output) if args.output else PREDICTIONS_CSV
-    predict_from_saved_model(
-        csv_path=Path(args.input),
-        threshold=args.threshold,
-        output_path=out,
+    print_terminal_summary(
+        metrics=metrics,
+        n_total=n_total,
+        n_train=n_train,
+        n_test=n_test,
+        model_name=args.model,
+        threshold=threshold,
     )
 
 
+def cmd_predict(args: argparse.Namespace) -> None:
+    from confidence_pipeline.data_loader import load_and_validate
+    from confidence_pipeline.train import load_model
+    from confidence_pipeline.predict import (
+        score_candidates,
+        save_predictions,
+        print_sample_predictions,
+    )
+
+    if not args.input:
+        print("Error: --input PATH is required for predict mode.")
+        sys.exit(1)
+
+    csv_path = Path(args.input)
+    df = load_and_validate(csv_path, require_labels=False)
+
+    pipeline = load_model(MODEL_PATH)
+    output_path = Path(args.output) if args.output else PREDICTIONS_CSV
+
+    predictions = score_candidates(df, pipeline, threshold=args.threshold)
+    save_predictions(predictions, output_path=output_path, original_df=df)
+    print_sample_predictions(predictions, threshold=args.threshold)
+
+
 def cmd_all(args: argparse.Namespace) -> None:
-    print("── Step 1/3: Generating synthetic dataset ──")
-    cmd_generate(args)
-    print("\n── Step 2/3: Training model ──")
+    # Train
     cmd_train(args)
-    print("\n── Step 3/3: Evaluating model ──")
+    # Evaluate
     cmd_evaluate(args)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="run_pipeline",
-        description="Confidence-Gated ML Pipeline for LLVM Peephole Optimization Verification",
+        description="Confidence Pipeline for LLVM Peephole Optimization Verification",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
 
     common = argparse.ArgumentParser(add_help=False)
     common.add_argument(
         "--model",
-        choices=["logistic_regression", "random_forest"],
+        choices=["logistic_regression", "random_forest", "gradient_boosting"],
         default="logistic_regression",
         help="ML model to use (default: logistic_regression)",
+    )
+    common.add_argument(
+        "--calibrate",
+        action="store_true",
+        default=False,
+        help="Apply probability calibration (Platt scaling)",
     )
     common.add_argument(
         "--threshold",
@@ -153,7 +165,7 @@ def main() -> None:
         "--input",
         type=str,
         default=None,
-        help="Path to input candidate CSV (default: data/synthetic_candidates.csv)",
+        help="Path to input candidate CSV",
     )
     common.add_argument(
         "--output",
@@ -167,7 +179,7 @@ def main() -> None:
     subparsers.add_parser("train",     parents=[common], help="Train the ML model")
     subparsers.add_parser("evaluate",  parents=[common], help="Evaluate on test set")
     subparsers.add_parser("predict",   parents=[common], help="Score a new candidate CSV")
-    subparsers.add_parser("all",       parents=[common], help="Generate → Train → Evaluate")
+    subparsers.add_parser("all",       parents=[common], help="Train → Evaluate")
 
     args = parser.parse_args()
 
