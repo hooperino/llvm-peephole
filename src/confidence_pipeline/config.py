@@ -11,8 +11,9 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 # ── Data paths
-DATA_DIR          = PROJECT_ROOT / "data"
-SYNTHETIC_CSV     = DATA_DIR / "synthetic_candidates.csv"
+DATA_DIR            = PROJECT_ROOT / "data"
+SYNTHETIC_CSV       = DATA_DIR / "synthetic_candidates.csv"
+REAL_CANDIDATES_CSV = DATA_DIR / "real_candidates.csv"
 
 # ── Model / results paths
 MODELS_DIR        = PROJECT_ROOT / "models"
@@ -44,7 +45,7 @@ CONFIDENCE_THRESHOLD = 0.50
 
 # ── Column names used throughout the pipeline
 ID_COL         = "candidate_id"
-LABEL_COL      = "label"           # binary target: 1 = expected-verifiable, 0 = not
+LABEL_COL      = "label"           # binary target: 1 = verified/expected-verifiable, 0 = not
 
 # Numeric feature columns
 NUMERIC_FEATURES = [
@@ -73,7 +74,16 @@ BOOL_FEATURES = [
 FEATURE_COLS = NUMERIC_FEATURES + CATEGORICAL_FEATURES + BOOL_FEATURES
 
 # Columns excluded from model input
-NON_FEATURE_COLS = [ID_COL, LABEL_COL, "src_repr", "tgt_repr"]
+NON_FEATURE_COLS = [
+    ID_COL,
+    LABEL_COL,
+    "src_repr",
+    "tgt_repr",
+    "verification_time_ms",
+    "status",
+    "bitwidth",
+    "has_ub_flags",
+]
 
 # Positive class label value
 POSITIVE_CLASS = 1
