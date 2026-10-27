@@ -1,7 +1,8 @@
 # Python
 .venv/
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 *.pyo
 *.pyd
 .env
@@ -10,6 +11,10 @@ __pycache__/
 build/
 *.o
 *.so
+*.a
+*.bc
+*.s
+*.smt2
 
 # ── Large external submodules / builds / third-party tools ──
 # (Excluded from git tracking as they can be downloaded / built separately)
@@ -18,9 +23,14 @@ alive2/
 llvm-build/
 llvm-project/
 
-# ── ML pipeline: generated artifacts (not source code) ──
+# ── ML pipeline & Candidate Generation: generated artifacts ──
 # Raw / unprocessed data from external tools
 data/raw/
+
+# Generated candidate IR files and manifests (regenerated via src/generate_real_candidates.py)
+data/candidates/
+data/candidates_manifest.csv
+data/real_candidates.csv
 
 # Trained model files
 models/*.joblib
@@ -36,7 +46,22 @@ results/plots/
 # If you prefer to exclude it: uncomment the next line
 # data/synthetic_candidates.csv
 
-# pytest cache
+# Logs & temp files
+*.log
+*.tmp
+
+# IDE / Editor & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Testing & Coverage
 .pytest_cache/
+.coverage
+htmlcov/
 *.egg-info/
 dist/
